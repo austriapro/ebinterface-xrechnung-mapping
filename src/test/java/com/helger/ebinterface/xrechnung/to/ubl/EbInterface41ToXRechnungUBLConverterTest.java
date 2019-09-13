@@ -34,7 +34,6 @@ import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.locale.LocaleCache;
 import com.helger.ebinterface.builder.EbInterfaceReader;
 import com.helger.ebinterface.v41.Ebi41InvoiceType;
-import com.helger.ebinterface.xrechnung.to.ubl.EbInterface41ToXRechnungUBLConverter;
 import com.helger.ubl21.UBL21Writer;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
@@ -49,7 +48,11 @@ public final class EbInterface41ToXRechnungUBLConverterTest
   private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface41ToXRechnungUBLConverterTest.class);
   private static final Locale LOC = LocaleCache.getInstance ().getLocale ("de", "AT");
 
-  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ();
+  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ("10055.xml",
+                                                                                  "5027.xml",
+                                                                                  "Gutschrift_TEST.xml",
+                                                                                  "Rechnung_mit_Rabatt.xml",
+                                                                                  "Rechnung_TEST.xml");
 
   @Test
   public void testBasic ()
