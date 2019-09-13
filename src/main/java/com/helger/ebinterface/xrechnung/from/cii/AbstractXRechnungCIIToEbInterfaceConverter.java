@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.xrechnung.from.AbstractXRechnungToEbInterfaceConverter;
 import com.helger.en16931.cii2ubl.CIIToUBL21Converter;
+import com.helger.en16931.cii2ubl.EUBLCreationMode;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
@@ -51,7 +52,7 @@ public abstract class AbstractXRechnungCIIToEbInterfaceConverter extends Abstrac
                                                 @Nonnull final ErrorList aErrorList)
   {
     final CIIToUBL21Converter aConverter = new CIIToUBL21Converter ();
-    aConverter.setForceInvoiceCreation (true);
+    aConverter.setUBLCreationMode (EUBLCreationMode.INVOICE);
 
     final int nErrorsBefore = aErrorList.getErrorCount ();
     final int nWarnsBefore = countWarnings (aErrorList);
