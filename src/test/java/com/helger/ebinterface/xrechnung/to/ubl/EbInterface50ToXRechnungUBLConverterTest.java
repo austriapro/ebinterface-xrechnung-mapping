@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.to;
+package com.helger.ebinterface.xrechnung.to.ubl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -33,34 +33,35 @@ import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.locale.LocaleCache;
 import com.helger.ebinterface.builder.EbInterfaceReader;
-import com.helger.ebinterface.v40.Ebi40InvoiceType;
+import com.helger.ebinterface.v50.Ebi50InvoiceType;
+import com.helger.ebinterface.xrechnung.to.ubl.EbInterface50ToXRechnungUBLConverter;
 import com.helger.ubl21.UBL21Writer;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Test class for class {@link EbInterface40ToXRechnungUBLConverter}.
+ * Test class for class {@link EbInterface50ToXRechnungUBLConverter}.
  *
  * @author Philip Helger
  */
-public final class EbInterface40ToXRechnungUBLConverterTest
+public final class EbInterface50ToXRechnungUBLConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface40ToXRechnungUBLConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface50ToXRechnungUBLConverterTest.class);
   private static final Locale LOC = LocaleCache.getInstance ().getLocale ("de", "AT");
 
-  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ();
+  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ("ebinterface_5p0_sample_ecosio.xml");
 
   @Test
   public void testBasic ()
   {
-    final EbInterface40ToXRechnungUBLConverter aToXRechnung = new EbInterface40ToXRechnungUBLConverter (LOC, LOC);
+    final EbInterface50ToXRechnungUBLConverter aToXRechnung = new EbInterface50ToXRechnungUBLConverter (LOC, LOC);
 
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi40")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi50")).withFilter (IFileFilter.filenameEndsWith (".xml")))
       if (!IGNORE_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");
 
-        final Ebi40InvoiceType aEbi = EbInterfaceReader.ebInterface40 ().read (aFile);
+        final Ebi50InvoiceType aEbi = EbInterfaceReader.ebInterface50 ().read (aFile);
         assertNotNull (aEbi);
 
         // To UBL

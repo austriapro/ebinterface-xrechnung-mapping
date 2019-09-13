@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.to;
+package com.helger.ebinterface.xrechnung.to.ubl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -27,25 +27,26 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.collection.impl.CommonsHashSet;
 import com.helger.commons.collection.impl.ICommonsSet;
-import com.helger.commons.error.level.IHasErrorLevel;
+import com.helger.commons.error.IError;
 import com.helger.commons.error.list.ErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.locale.LocaleCache;
 import com.helger.ebinterface.builder.EbInterfaceReader;
-import com.helger.ebinterface.v43.Ebi43InvoiceType;
+import com.helger.ebinterface.v42.Ebi42InvoiceType;
+import com.helger.ebinterface.xrechnung.to.ubl.EbInterface42ToXRechnungUBLConverter;
 import com.helger.ubl21.UBL21Writer;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Test class for class {@link EbInterface43ToXRechnungUBLConverter}.
+ * Test class for class {@link EbInterface42ToXRechnungUBLConverter}.
  *
  * @author Philip Helger
  */
-public final class EbInterface43ToXRechnungUBLConverterTest
+public final class EbInterface42ToXRechnungUBLConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface43ToXRechnungUBLConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface42ToXRechnungUBLConverterTest.class);
   private static final Locale LOC = LocaleCache.getInstance ().getLocale ("de", "AT");
 
   private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ();
@@ -53,14 +54,14 @@ public final class EbInterface43ToXRechnungUBLConverterTest
   @Test
   public void testBasic ()
   {
-    final EbInterface43ToXRechnungUBLConverter aToXRechnung = new EbInterface43ToXRechnungUBLConverter (LOC, LOC);
+    final EbInterface42ToXRechnungUBLConverter aToXRechnung = new EbInterface42ToXRechnungUBLConverter (LOC, LOC);
 
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi43")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi42")).withFilter (IFileFilter.filenameEndsWith (".xml")))
       if (!IGNORE_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");
 
-        final Ebi43InvoiceType aEbi = EbInterfaceReader.ebInterface43 ().read (aFile);
+        final Ebi42InvoiceType aEbi = EbInterfaceReader.ebInterface42 ().read (aFile);
         assertNotNull (aEbi);
 
         // To UBL
@@ -71,7 +72,7 @@ public final class EbInterface43ToXRechnungUBLConverterTest
         if (aErrorList.containsAtLeastOneError ())
           LOGGER.info (UBL21Writer.invoice ().setFormattedOutput (true).getAsString (aInvoice));
 
-        aErrorList.forEach (x -> LOGGER.info (x.getAsString (LOC)), IHasErrorLevel::isError);
+        aErrorList.forEach (x -> LOGGER.info (x.getAsString (LOC)), IError::isError);
         assertTrue (aErrorList.containsNoError ());
       }
   }

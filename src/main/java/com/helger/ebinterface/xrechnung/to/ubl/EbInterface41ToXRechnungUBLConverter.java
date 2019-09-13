@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.to;
+package com.helger.ebinterface.xrechnung.to.ubl;
 
 import java.util.Locale;
 
@@ -26,8 +26,8 @@ import org.w3c.dom.Document;
 
 import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.EEbInterfaceVersion;
-import com.helger.ebinterface.ubl.to.EbInterface50ToInvoiceConverter;
-import com.helger.ebinterface.v50.Ebi50InvoiceType;
+import com.helger.ebinterface.ubl.to.EbInterface41ToInvoiceConverter;
+import com.helger.ebinterface.v41.Ebi41InvoiceType;
 import com.helger.ebinterface.xrechnung.validator.XRechnungValidator;
 import com.helger.jaxb.validation.WrappedCollectingValidationEventHandler;
 import com.helger.ubl21.UBL21Writer;
@@ -35,17 +35,17 @@ import com.helger.ubl21.UBL21Writer;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Convert an ebInterface 5.0 invoice to an XRechnung UBL.
+ * Convert an ebInterface 4.1 invoice to an XRechnung UBL.
  *
  * @author Philip Helger
  */
-public class EbInterface50ToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungUBLConverter
+public class EbInterface41ToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungUBLConverter
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface50ToXRechnungUBLConverter.class);
-  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V50;
+  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface41ToXRechnungUBLConverter.class);
+  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V41;
   private static final String VERSION_STR = "ebInterface " + VERSION.getVersion ().getAsStringMajorMinor ();
 
-  public EbInterface50ToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
+  public EbInterface41ToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
                                                @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
@@ -66,10 +66,10 @@ public class EbInterface50ToXRechnungUBLConverter extends AbstractEbInterfaceToX
    * @return <code>null</code> only if the basic conversion to UBL fails.
    */
   @Nullable
-  public InvoiceType convert (@Nonnull final Ebi50InvoiceType aEbiInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public InvoiceType convert (@Nonnull final Ebi41InvoiceType aEbiInvoice, @Nonnull final ErrorList aTransformErrorList)
   {
     // Convert ebInterface to UBL
-    final InvoiceType aUBLInvoice = new EbInterface50ToInvoiceConverter (m_aDisplayLocale,
+    final InvoiceType aUBLInvoice = new EbInterface41ToInvoiceConverter (m_aDisplayLocale,
                                                                          m_aContentLocale).convertInvoice (aEbiInvoice);
     assert aUBLInvoice != null;
 

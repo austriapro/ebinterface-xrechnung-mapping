@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.to;
+package com.helger.ebinterface.xrechnung.to.ubl;
 
 import java.math.BigDecimal;
 import java.util.Locale;
@@ -21,6 +21,7 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 
 import com.helger.commons.math.MathHelper;
+import com.helger.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.InvoiceLineType;
