@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.from;
+package com.helger.ebinterface.xrechnung.from.ubl;
 
 import java.util.Locale;
 
@@ -25,37 +25,38 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.EEbInterfaceVersion;
-import com.helger.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface43Converter;
-import com.helger.ebinterface.ubl.from.invoice.InvoiceToEbInterface43Converter;
-import com.helger.ebinterface.v43.Ebi43InvoiceType;
+import com.helger.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface40Converter;
+import com.helger.ebinterface.ubl.from.invoice.InvoiceToEbInterface40Converter;
+import com.helger.ebinterface.v40.Ebi40InvoiceType;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Convert XRechnung UBL to ebInterface 4.3
+ * Convert XRechnung UBL to ebInterface 4.0
  *
  * @author Philip Helger
  */
-public class XRechnungUBLInvoiceToEbInterface43Converter extends AbstractXRechnungUBLToEbInterfaceConverter
+public class XRechnungUBLInvoiceToEbInterface40Converter extends AbstractXRechnungUBLToEbInterfaceConverter
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface43Converter.class);
-  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V43;
+  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface40Converter.class);
+  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V40;
   private static final String VERSION_STR = "ebInterface " + VERSION.getVersion ().getAsStringMajorMinor ();
 
-  private final ICustomInvoiceToEbInterface43Converter m_aCustomizer = null;
+  private final ICustomInvoiceToEbInterface40Converter m_aCustomizer = null;
 
-  public XRechnungUBLInvoiceToEbInterface43Converter (@Nonnull final Locale aDisplayLocale,
+  public XRechnungUBLInvoiceToEbInterface40Converter (@Nonnull final Locale aDisplayLocale,
                                                       @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
+    m_aToEbiSettings.setFallbackBillersInvoiceRecipientID ("none-provided");
   }
 
   @Nullable
-  public Ebi43InvoiceType convert (@Nonnull final InvoiceType aUBLInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public Ebi40InvoiceType convert (@Nonnull final InvoiceType aUBLInvoice, @Nonnull final ErrorList aTransformErrorList)
   {
     final int nErrorsBefore = aTransformErrorList.getErrorCount ();
     final int nWarnsBefore = countWarnings (aTransformErrorList);
-    final Ebi43InvoiceType ret = new InvoiceToEbInterface43Converter (m_aDisplayLocale,
+    final Ebi40InvoiceType ret = new InvoiceToEbInterface40Converter (m_aDisplayLocale,
                                                                       m_aContentLocale,
                                                                       m_aToEbiSettings).setCustomizer (m_aCustomizer)
                                                                                        .convertToEbInterface (aUBLInvoice,

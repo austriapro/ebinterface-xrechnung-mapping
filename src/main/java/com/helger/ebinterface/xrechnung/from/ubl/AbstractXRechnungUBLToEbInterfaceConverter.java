@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.from;
+package com.helger.ebinterface.xrechnung.from.ubl;
 
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+
+import com.helger.ebinterface.xrechnung.from.AbstractXRechnungToEbInterfaceConverter;
 
 /**
  * Abstract base class to convert XRechnung UBL to ebInterface,

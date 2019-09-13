@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.from;
+package com.helger.ebinterface.xrechnung.from.cii;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -25,43 +25,43 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.helger.cii.d16b.CIID16BReader;
 import com.helger.commons.error.list.ErrorList;
 import com.helger.commons.error.list.IErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.ebinterface.builder.EbInterfaceValidator;
-import com.helger.ebinterface.v50.Ebi50InvoiceType;
-import com.helger.ubl21.UBL21Reader;
+import com.helger.ebinterface.v42.Ebi42InvoiceType;
 
-import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
+import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
-public final class XRechnungUBLInvoiceToEbInterface50ConverterTest
+public final class XRechnungCIIInvoiceToEbInterface42ConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface50ConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungCIIInvoiceToEbInterface42ConverterTest.class);
   private static final Locale LOC = Locale.GERMAN;
 
   @Test
   public void testBasic ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 
-      // Read as UBL
-      final InvoiceType aUBLInvoice = UBL21Reader.invoice ().read (aFile);
-      assertNotNull (aUBLInvoice);
+      // Read as CII
+      final CrossIndustryInvoiceType aCIIInvoice = CIID16BReader.crossIndustryInvoice ().read (aFile);
+      assertNotNull (aCIIInvoice);
 
       // Convert to ebInterface
       final ErrorList aTransformErrorList = new ErrorList ();
-      final Ebi50InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface50Converter (LOC,
-                                                                                     LOC).convert (aUBLInvoice,
+      final Ebi42InvoiceType aEbi = new XRechnungCIIInvoiceToEbInterface42Converter (LOC,
+                                                                                     LOC).convert (aCIIInvoice,
                                                                                                    aTransformErrorList);
       assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
                   aTransformErrorList.containsNoError ());
       assertNotNull (aEbi);
 
       // Validate ebInterface
-      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface50 ().validate (aEbi);
+      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface42 ().validate (aEbi);
       assertNotNull (aValidationErrors);
       assertTrue (aValidationErrors.getAllErrors ().toString (), aValidationErrors.containsNoError ());
     }

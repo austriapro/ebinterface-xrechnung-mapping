@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.from;
+package com.helger.ebinterface.xrechnung.from.ubl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -30,14 +30,15 @@ import com.helger.commons.error.list.IErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.ebinterface.builder.EbInterfaceValidator;
-import com.helger.ebinterface.v43.Ebi43InvoiceType;
+import com.helger.ebinterface.v41.Ebi41InvoiceType;
+import com.helger.ebinterface.xrechnung.from.ubl.XRechnungUBLInvoiceToEbInterface41Converter;
 import com.helger.ubl21.UBL21Reader;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
-public final class XRechnungUBLInvoiceToEbInterface43ConverterTest
+public final class XRechnungUBLInvoiceToEbInterface41ConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface43ConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface41ConverterTest.class);
   private static final Locale LOC = Locale.GERMAN;
 
   @Test
@@ -53,7 +54,7 @@ public final class XRechnungUBLInvoiceToEbInterface43ConverterTest
 
       // Convert to ebInterface
       final ErrorList aTransformErrorList = new ErrorList ();
-      final Ebi43InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface43Converter (LOC,
+      final Ebi41InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface41Converter (LOC,
                                                                                      LOC).convert (aUBLInvoice,
                                                                                                    aTransformErrorList);
       assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
@@ -61,7 +62,7 @@ public final class XRechnungUBLInvoiceToEbInterface43ConverterTest
       assertNotNull (aEbi);
 
       // Validate ebInterface
-      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface43 ().validate (aEbi);
+      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface41 ().validate (aEbi);
       assertNotNull (aValidationErrors);
       assertTrue (aValidationErrors.getAllErrors ().toString (), aValidationErrors.containsNoError ());
     }

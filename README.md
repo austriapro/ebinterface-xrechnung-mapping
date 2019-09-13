@@ -22,3 +22,20 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 * `EbInterface42ToXRechnungUBLConverter` - convert from ebInterface v4.2
 * `EbInterface43ToXRechnungUBLConverter` - convert from ebInterface v4.3
 * `EbInterface50ToXRechnungUBLConverter` - convert from ebInterface v5.0
+
+# News and noteworthy
+
+* v1.0.0 - work in progress
+    * Initial using ebinterface-ubl-mapping v4.0.0
+
+# Maven usage
+
+Add the following to your pom.xml to use this artifact:
+
+```xml
+<dependency>
+  <groupId>com.helger</groupId>
+  <artifactId>ebinterface-xrechnung-mapping</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.helger.ebinterface.xrechnung.from;
+package com.helger.ebinterface.xrechnung.from.cii;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.helger.cii.d16b.CIID16BReader;
 import com.helger.commons.collection.impl.CommonsHashSet;
 import com.helger.commons.collection.impl.ICommonsSet;
 import com.helger.commons.error.list.ErrorList;
@@ -33,33 +34,32 @@ import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.ebinterface.builder.EbInterfaceValidator;
 import com.helger.ebinterface.v40.Ebi40InvoiceType;
-import com.helger.ubl21.UBL21Reader;
 
-import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
+import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
-public final class XRechnungUBLInvoiceToEbInterface40ConverterTest
+public final class XRechnungCIIInvoiceToEbInterface40ConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface40ConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungCIIInvoiceToEbInterface40ConverterTest.class);
   private static final Locale LOC = Locale.GERMAN;
 
-  private static final ICommonsSet <String> IGNORED_FILES = new CommonsHashSet <> ("01.04a-INVOICE_ubl.xml");
+  private static final ICommonsSet <String> IGNORED_FILES = new CommonsHashSet <> ("01.04a-INVOICE_uncefact.xml");
 
   @Test
   public void testBasic ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
       if (!IGNORED_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");
 
-        // Read as UBL
-        final InvoiceType aUBLInvoice = UBL21Reader.invoice ().read (aFile);
-        assertNotNull (aUBLInvoice);
+        // Read as CII
+        final CrossIndustryInvoiceType aCIIInvoice = CIID16BReader.crossIndustryInvoice ().read (aFile);
+        assertNotNull (aCIIInvoice);
 
         // Convert to ebInterface
         final ErrorList aTransformErrorList = new ErrorList ();
-        final Ebi40InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface40Converter (LOC,
-                                                                                       LOC).convert (aUBLInvoice,
+        final Ebi40InvoiceType aEbi = new XRechnungCIIInvoiceToEbInterface40Converter (LOC,
+                                                                                       LOC).convert (aCIIInvoice,
                                                                                                      aTransformErrorList);
         assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
                     aTransformErrorList.containsNoError ());
