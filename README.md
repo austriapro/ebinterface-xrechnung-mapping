@@ -34,7 +34,10 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 
 # News and noteworthy
 
-* v1.0.0 - work in progress
+* v1.0.0 - 2019-10-01
+    * Changed all package names to `at.austriapro`
+    * Changed the Maven group `at.austriapro`
+* v0.9.0 - 2019-09-18
     * Initial version using ebinterface-ubl-mapping v4.0.0 and cii2ubl v1.1.5
 
 # Maven usage
@@ -43,8 +46,8 @@ Add the following to your pom.xml to use this artifact:
 
 ```xml
 <dependency>
-  <groupId>com.helger</groupId>
+  <groupId>at.austriapro</groupId>
   <artifactId>ebinterface-xrechnung-mapping</artifactId>
-  <version>0.9.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
