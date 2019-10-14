@@ -34,6 +34,8 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 
 # News and noteworthy
 
+* v1.0.1 - work in progress
+    * Updated to ebinterface-ubl-mapping 4.5.1
 * v1.0.0 - 2019-10-01
     * Changed all package names to `at.austriapro`
     * Changed the Maven group `at.austriapro`
