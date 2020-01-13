@@ -31,6 +31,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.Ite
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyLegalEntityType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyNameType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PaymentTermsType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PriceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.NoteType;
@@ -131,10 +132,14 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
     {
       if (!aInvoice.getPaymentTerms ().isEmpty ())
       {
-        final XMLGregorianCalendar aDueDate = aInvoice.getPaymentTermsAtIndex (0).getPaymentDueDateValue ();
-        if (aDueDate != null)
-          aInvoice.getPaymentTermsAtIndex (0)
-                  .addNote (new NoteType ("Due at " + PDTXMLConverter.getLocalDate (aDueDate)));
+        final PaymentTermsType aPT = aInvoice.getPaymentTermsAtIndex (0);
+        if (aPT.getNote ().isEmpty ())
+        {
+          // Ensure that a note is present, to work around the wrong Schematron
+          final XMLGregorianCalendar aDueDate = aPT.getPaymentDueDateValue ();
+          if (aDueDate != null)
+            aPT.addNote (new NoteType ("Due at " + PDTXMLConverter.getLocalDate (aDueDate)));
+        }
       }
     }
   }
