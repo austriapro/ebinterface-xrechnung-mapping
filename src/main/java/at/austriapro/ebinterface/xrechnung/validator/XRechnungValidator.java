@@ -63,16 +63,16 @@ public final class XRechnungValidator
 
   public static void validateXRechnungCII (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_CII_121, aNode, aErrorList);
+    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_CII_122, aNode, aErrorList);
   }
 
   public static void validateXRechnungUBLInvoice (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_121, aNode, aErrorList);
+    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122, aNode, aErrorList);
   }
 
   public static void validateXRechnungUBLCreditNote (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_121, aNode, aErrorList);
+    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_122, aNode, aErrorList);
   }
 }

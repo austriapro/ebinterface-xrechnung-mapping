@@ -19,8 +19,10 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.helger.commons.math.MathHelper;
+import com.helger.datetime.util.PDTXMLConverter;
 
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
@@ -31,6 +33,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.Par
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PriceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.NoteType;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
@@ -118,6 +121,20 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
           aPrice.setPriceAmount (aPriceAmount.negate ());
           aInvoiceLine.setInvoicedQuantity (aInvoiceLine.getInvoicedQuantityValue ().negate ());
         }
+      }
+    }
+
+    // Work around for error "BR-CO-25" (error in CEN validation artefacts
+    // 1.3.0; see issue #84) that was introduced when updating to XRechnung
+    // rules 1.2.2
+    if (MathHelper.isGT0 (aInvoice.getLegalMonetaryTotal ().getPayableAmountValue ()))
+    {
+      if (!aInvoice.getPaymentTerms ().isEmpty ())
+      {
+        final XMLGregorianCalendar aDueDate = aInvoice.getPaymentTermsAtIndex (0).getPaymentDueDateValue ();
+        if (aDueDate != null)
+          aInvoice.getPaymentTermsAtIndex (0)
+                  .addNote (new NoteType ("Due at " + PDTXMLConverter.getLocalDate (aDueDate)));
       }
     }
   }

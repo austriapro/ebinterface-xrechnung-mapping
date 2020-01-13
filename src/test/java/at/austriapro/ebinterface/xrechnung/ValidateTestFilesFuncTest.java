@@ -48,7 +48,7 @@ public final class ValidateTestFilesFuncTest
   @Test
   public void testXRechnungUBL ()
   {
-    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_121);
+    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
     final ValidationExecutionManager aVEM = aVES.createExecutionManager ();
 
     for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
@@ -65,7 +65,7 @@ public final class ValidateTestFilesFuncTest
   @Test
   public void testXRechnungCII ()
   {
-    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_121);
+    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
     final ValidationExecutionManager aVEM = aVES.createExecutionManager ();
 
     for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
