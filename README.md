@@ -34,6 +34,8 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 
 # News and noteworthy
 
+* v1.0.2 - 2020-01-13
+    * Updated to support the XRechnung 1.2.2 document type
 * v1.0.1 - 2019-10-14
     * Updated to ebinterface-ubl-mapping 4.5.1
 * v1.0.0 - 2019-10-01
@@ -50,6 +52,6 @@ Add the following to your pom.xml to use this artifact:
 <dependency>
   <groupId>at.austriapro</groupId>
   <artifactId>ebinterface-xrechnung-mapping</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
