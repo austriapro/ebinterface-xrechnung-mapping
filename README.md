@@ -32,8 +32,22 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 * `EbInterface43ToXRechnungUBLConverter` - convert from ebInterface v4.3
 * `EbInterface50ToXRechnungUBLConverter` - convert from ebInterface v5.0
 
+# Maven usage
+
+Add the following to your pom.xml to use this artifact:
+
+```xml
+<dependency>
+  <groupId>at.austriapro</groupId>
+  <artifactId>ebinterface-xrechnung-mapping</artifactId>
+  <version>1.0.3</version>
+</dependency>
+```
+
 # News and noteworthy
 
+* v1.0.3 - 2020-02-07
+    * Updated to peppol-commons 8.x
 * v1.0.2 - 2020-01-13
     * Updated to support the XRechnung 1.2.2 document type
 * v1.0.1 - 2019-10-14
@@ -43,18 +57,6 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
     * Changed the Maven group `at.austriapro`
 * v0.9.0 - 2019-09-18
     * Initial version using ebinterface-ubl-mapping v4.0.0 and cii2ubl v1.1.5
-
-# Maven usage
-
-Add the following to your pom.xml to use this artifact:
-
-```xml
-<dependency>
-  <groupId>at.austriapro</groupId>
-  <artifactId>ebinterface-xrechnung-mapping</artifactId>
-  <version>1.0.2</version>
-</dependency>
-```
 
 ---
 
