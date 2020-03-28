@@ -36,7 +36,6 @@ import com.helger.ebinterface.builder.EbInterfaceReader;
 import com.helger.ebinterface.v43.Ebi43InvoiceType;
 import com.helger.ubl21.UBL21Writer;
 
-import at.austriapro.ebinterface.xrechnung.to.ubl.EbInterface43ToXRechnungUBLConverter;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
@@ -72,7 +71,7 @@ public final class EbInterface43ToXRechnungUBLConverterTest
         if (aErrorList.containsAtLeastOneError ())
           LOGGER.info (UBL21Writer.invoice ().setFormattedOutput (true).getAsString (aInvoice));
 
-        aErrorList.forEach (x -> LOGGER.info (x.getAsString (LOC)), IHasErrorLevel::isError);
+        aErrorList.findAll (IHasErrorLevel::isError, x -> LOGGER.info (x.getAsString (LOC)));
         assertTrue (aErrorList.containsNoError ());
       }
   }

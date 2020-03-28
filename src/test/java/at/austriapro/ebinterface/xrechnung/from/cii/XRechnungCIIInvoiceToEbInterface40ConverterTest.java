@@ -35,7 +35,6 @@ import com.helger.commons.io.file.IFileFilter;
 import com.helger.ebinterface.builder.EbInterfaceValidator;
 import com.helger.ebinterface.v40.Ebi40InvoiceType;
 
-import at.austriapro.ebinterface.xrechnung.from.cii.XRechnungCIIInvoiceToEbInterface40Converter;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
 public final class XRechnungCIIInvoiceToEbInterface40ConverterTest

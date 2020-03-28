@@ -35,7 +35,6 @@ import com.helger.ebinterface.builder.EbInterfaceValidator;
 import com.helger.ebinterface.v40.Ebi40InvoiceType;
 import com.helger.ubl21.UBL21Reader;
 
-import at.austriapro.ebinterface.xrechnung.from.ubl.XRechnungUBLInvoiceToEbInterface40Converter;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 public final class XRechnungUBLInvoiceToEbInterface40ConverterTest

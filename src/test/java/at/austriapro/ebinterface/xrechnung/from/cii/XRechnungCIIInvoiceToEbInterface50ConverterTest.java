@@ -33,7 +33,6 @@ import com.helger.commons.io.file.IFileFilter;
 import com.helger.ebinterface.builder.EbInterfaceValidator;
 import com.helger.ebinterface.v50.Ebi50InvoiceType;
 
-import at.austriapro.ebinterface.xrechnung.from.cii.XRechnungCIIInvoiceToEbInterface50Converter;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
 public final class XRechnungCIIInvoiceToEbInterface50ConverterTest
