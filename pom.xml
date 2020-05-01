@@ -92,7 +92,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-ebinterface</artifactId>
-        <version>6.1.2</version>
+        <version>6.1.3</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
@@ -109,7 +109,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-bdve-parent-pom</artifactId>
-        <version>5.2.10</version>
+        <version>5.2.11</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
