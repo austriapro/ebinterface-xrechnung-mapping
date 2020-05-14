@@ -43,14 +43,15 @@ Add the following to your pom.xml to use this artifact:
 <dependency>
   <groupId>at.austriapro</groupId>
   <artifactId>ebinterface-xrechnung-mapping</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
 # News and noteworthy
 
-* v1.0.5 - work in progress
+* v1.0.5 - 2020-05-14
     * Added support for ebInterface 6.0
+    * Made ebInterface customizer customizable
 * v1.0.4 - 2020-04-01
     * Updated to ebinterface-ubl-mapping 4.5.4
     * Updated to en16931-cii2ubl 1.2.0
