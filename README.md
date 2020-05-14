@@ -13,6 +13,7 @@ To convert an XRechnung UBL to ebInterface use the following classes:
 * `XRechnungUBLInvoiceToEbInterface42Converter` - convert to ebInterface v4.2
 * `XRechnungUBLInvoiceToEbInterface43Converter` - convert to ebInterface v4.3
 * `XRechnungUBLInvoiceToEbInterface50Converter` - convert to ebInterface v5.0
+* `XRechnungUBLInvoiceToEbInterface60Converter` - convert to ebInterface v6.0
 
 ## XRechnung CII to ebInterface
 
@@ -22,6 +23,7 @@ To convert an XRechnung CII to ebInterface use the following classes:
 * `XRechnungCIIInvoiceToEbInterface42Converter` - convert to ebInterface v4.2
 * `XRechnungCIIInvoiceToEbInterface43Converter` - convert to ebInterface v4.3
 * `XRechnungCIIInvoiceToEbInterface50Converter` - convert to ebInterface v5.0
+* `XRechnungCIIInvoiceToEbInterface60Converter` - convert to ebInterface v6.0
 
 ## ebInterface to XRechnung UBL
 
@@ -31,6 +33,7 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 * `EbInterface42ToXRechnungUBLConverter` - convert from ebInterface v4.2
 * `EbInterface43ToXRechnungUBLConverter` - convert from ebInterface v4.3
 * `EbInterface50ToXRechnungUBLConverter` - convert from ebInterface v5.0
+* `EbInterface60ToXRechnungUBLConverter` - convert from ebInterface v6.0
 
 # Maven usage
 
@@ -46,6 +49,8 @@ Add the following to your pom.xml to use this artifact:
 
 # News and noteworthy
 
+* v1.0.5 - work in progress
+    * Added support for ebInterface 6.0
 * v1.0.4 - 2020-04-01
     * Updated to ebinterface-ubl-mapping 4.5.4
     * Updated to en16931-cii2ubl 1.2.0

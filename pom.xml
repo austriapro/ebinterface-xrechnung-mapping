@@ -104,7 +104,7 @@
       <dependency>
         <groupId>at.austriapro</groupId>
         <artifactId>ebinterface-ubl-mapping</artifactId>
-        <version>4.5.4</version>
+        <version>4.5.5</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
