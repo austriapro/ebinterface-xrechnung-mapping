@@ -23,6 +23,7 @@ import javax.annotation.Nullable;
 import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.v43.Ebi43InvoiceType;
 
+import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface43Converter;
 import at.austriapro.ebinterface.xrechnung.from.ubl.XRechnungUBLInvoiceToEbInterface43Converter;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
@@ -34,23 +35,29 @@ import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryIn
  */
 public class XRechnungCIIInvoiceToEbInterface43Converter extends AbstractXRechnungCIIToEbInterfaceConverter
 {
-  public XRechnungCIIInvoiceToEbInterface43Converter (@Nonnull final Locale aDisplayLocale,
-                                                      @Nonnull final Locale aContentLocale)
+  private ICustomInvoiceToEbInterface43Converter m_aCustomizer;
+
+  public XRechnungCIIInvoiceToEbInterface43Converter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
+  @Nonnull
+  public XRechnungCIIInvoiceToEbInterface43Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface43Converter aCustomizer)
+  {
+    m_aCustomizer = aCustomizer;
+    return this;
+  }
+
   @Nullable
-  public Ebi43InvoiceType convert (@Nonnull final CrossIndustryInvoiceType aCIIInvoice,
-                                   @Nonnull final ErrorList aTransformErrorList)
+  public Ebi43InvoiceType convert (@Nonnull final CrossIndustryInvoiceType aCIIInvoice, @Nonnull final ErrorList aTransformErrorList)
   {
     final InvoiceType aUBLInvoice = convertCIIToUBL (aCIIInvoice, aTransformErrorList);
     if (aUBLInvoice == null)
       return null;
 
     aTransformErrorList.clear ();
-    return new XRechnungUBLInvoiceToEbInterface43Converter (m_aDisplayLocale,
-                                                            m_aContentLocale).convert (aUBLInvoice,
-                                                                                       aTransformErrorList);
+    return new XRechnungUBLInvoiceToEbInterface43Converter (m_aDisplayLocale, m_aContentLocale).setCustomizer (m_aCustomizer)
+                                                                                               .convert (aUBLInvoice, aTransformErrorList);
   }
 }

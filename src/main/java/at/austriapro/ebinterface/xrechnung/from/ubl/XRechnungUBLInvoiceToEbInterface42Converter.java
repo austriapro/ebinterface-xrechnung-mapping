@@ -42,12 +42,18 @@ public class XRechnungUBLInvoiceToEbInterface42Converter extends AbstractXRechnu
   private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V42;
   private static final String VERSION_STR = "ebInterface " + VERSION.getVersion ().getAsStringMajorMinor ();
 
-  private final ICustomInvoiceToEbInterface42Converter m_aCustomizer = null;
+  private ICustomInvoiceToEbInterface42Converter m_aCustomizer;
 
-  public XRechnungUBLInvoiceToEbInterface42Converter (@Nonnull final Locale aDisplayLocale,
-                                                      @Nonnull final Locale aContentLocale)
+  public XRechnungUBLInvoiceToEbInterface42Converter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
+  }
+
+  @Nonnull
+  public XRechnungUBLInvoiceToEbInterface42Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface42Converter aCustomizer)
+  {
+    m_aCustomizer = aCustomizer;
+    return this;
   }
 
   @Nullable
