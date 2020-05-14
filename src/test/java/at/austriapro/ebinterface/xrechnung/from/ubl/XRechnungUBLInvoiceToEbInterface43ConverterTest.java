@@ -53,11 +53,8 @@ public final class XRechnungUBLInvoiceToEbInterface43ConverterTest
 
       // Convert to ebInterface
       final ErrorList aTransformErrorList = new ErrorList ();
-      final Ebi43InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface43Converter (LOC,
-                                                                                     LOC).convert (aUBLInvoice,
-                                                                                                   aTransformErrorList);
-      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
-                  aTransformErrorList.containsNoError ());
+      final Ebi43InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface43Converter (LOC, LOC).convert (aUBLInvoice, aTransformErrorList);
+      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (), aTransformErrorList.containsNoError ());
       assertNotNull (aEbi);
 
       // Validate ebInterface
