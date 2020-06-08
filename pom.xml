@@ -102,7 +102,14 @@
       <dependency>
         <groupId>com.helger.bdve</groupId>
         <artifactId>ph-bdve-parent-pom</artifactId>
-        <version>5.3.1</version>
+        <version>6.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.helger.bdve.rules</groupId>
+        <artifactId>ph-bdve-rules-parent-pom</artifactId>
+        <version>1.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -154,8 +161,8 @@
       <artifactId>ebinterface-ubl-mapping</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.helger.bdve</groupId>
-      <artifactId>ph-bdve-xrechnung</artifactId>
+      <groupId>com.helger.bdve.rules</groupId>
+      <artifactId>ph-bdve-rules-xrechnung</artifactId>
     </dependency>
 
     <dependency>

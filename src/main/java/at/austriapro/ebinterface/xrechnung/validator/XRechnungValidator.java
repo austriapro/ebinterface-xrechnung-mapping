@@ -19,13 +19,14 @@ import javax.annotation.Nonnull;
 
 import org.w3c.dom.Node;
 
+import com.helger.bdve.api.execute.ValidationExecutionManager;
+import com.helger.bdve.api.executorset.IValidationExecutorSet;
+import com.helger.bdve.api.executorset.VESID;
+import com.helger.bdve.api.executorset.ValidationExecutorSetRegistry;
+import com.helger.bdve.api.result.ValidationResultList;
 import com.helger.bdve.en16931.EN16931Validation;
-import com.helger.bdve.execute.ValidationExecutionManager;
-import com.helger.bdve.executorset.IValidationExecutorSet;
-import com.helger.bdve.executorset.VESID;
-import com.helger.bdve.executorset.ValidationExecutorSetRegistry;
-import com.helger.bdve.result.ValidationResultList;
-import com.helger.bdve.source.ValidationSource;
+import com.helger.bdve.engine.source.IValidationSourceXML;
+import com.helger.bdve.engine.source.ValidationSourceXML;
 import com.helger.bdve.xrechnung.XRechnungValidation;
 import com.helger.commons.error.list.ErrorList;
 
@@ -36,7 +37,7 @@ import com.helger.commons.error.list.ErrorList;
  */
 public final class XRechnungValidator
 {
-  private static final ValidationExecutorSetRegistry VES_REGISTRY = new ValidationExecutorSetRegistry ();
+  private static final ValidationExecutorSetRegistry <IValidationSourceXML> VES_REGISTRY = new ValidationExecutorSetRegistry <> ();
   static
   {
     EN16931Validation.initEN16931 (VES_REGISTRY);
@@ -46,18 +47,15 @@ public final class XRechnungValidator
   private XRechnungValidator ()
   {}
 
-  private static void _validateXRechnung (@Nonnull final VESID aVESID,
-                                          @Nonnull final Node aNode,
-                                          @Nonnull final ErrorList aErrorList)
+  private static void _validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
-    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (aVESID);
+    final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (aVESID);
     if (aVES == null)
       throw new IllegalStateException ("Failed to resolve VESID " + aVESID);
-    final ValidationExecutionManager aVEM = aVES.createExecutionManager ();
     // What to validate?
-    final ValidationSource aValidationSource = ValidationSource.create (null, aNode);
+    final IValidationSourceXML aValidationSource = ValidationSourceXML.create (null, aNode);
     // Main validation
-    final ValidationResultList aValidationResult = aVEM.executeValidation (aValidationSource);
+    final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
     aValidationResult.forEachFlattened (aErrorList::add);
   }
 

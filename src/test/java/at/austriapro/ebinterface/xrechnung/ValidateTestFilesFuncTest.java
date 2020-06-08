@@ -23,12 +23,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.helger.bdve.api.execute.ValidationExecutionManager;
+import com.helger.bdve.api.executorset.IValidationExecutorSet;
+import com.helger.bdve.api.executorset.ValidationExecutorSetRegistry;
+import com.helger.bdve.api.result.ValidationResultList;
 import com.helger.bdve.en16931.EN16931Validation;
-import com.helger.bdve.execute.ValidationExecutionManager;
-import com.helger.bdve.executorset.IValidationExecutorSet;
-import com.helger.bdve.executorset.ValidationExecutorSetRegistry;
-import com.helger.bdve.result.ValidationResultList;
-import com.helger.bdve.source.ValidationSource;
+import com.helger.bdve.engine.source.IValidationSourceXML;
+import com.helger.bdve.engine.source.ValidationSourceXML;
 import com.helger.bdve.xrechnung.XRechnungValidation;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
@@ -38,7 +39,7 @@ public final class ValidateTestFilesFuncTest
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (ValidateTestFilesFuncTest.class);
 
-  private static final ValidationExecutorSetRegistry VES_REGISTRY = new ValidationExecutorSetRegistry ();
+  private static final ValidationExecutorSetRegistry <IValidationSourceXML> VES_REGISTRY = new ValidationExecutorSetRegistry <> ();
   static
   {
     EN16931Validation.initEN16931 (VES_REGISTRY);
@@ -48,16 +49,15 @@ public final class ValidateTestFilesFuncTest
   @Test
   public void testXRechnungUBL ()
   {
-    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
-    final ValidationExecutionManager aVEM = aVES.createExecutionManager ();
+    final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
 
     for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
       // What to validate?
-      final ValidationSource aValidationSource = ValidationSource.createXMLSource (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = aVEM.executeValidation (aValidationSource);
+      final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
   }
@@ -65,16 +65,15 @@ public final class ValidateTestFilesFuncTest
   @Test
   public void testXRechnungCII ()
   {
-    final IValidationExecutorSet aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
-    final ValidationExecutionManager aVEM = aVES.createExecutionManager ();
+    final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
 
     for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
       // What to validate?
-      final ValidationSource aValidationSource = ValidationSource.createXMLSource (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = aVEM.executeValidation (aValidationSource);
+      final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
   }
