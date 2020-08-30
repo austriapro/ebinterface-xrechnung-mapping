@@ -64,7 +64,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-commons-parent-pom</artifactId>
-        <version>9.4.6</version>
+        <version>9.4.7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -78,26 +78,26 @@
       <dependency>
         <groupId>com.helger.ubl</groupId>
         <artifactId>ph-ubl-parent-pom</artifactId>
-        <version>6.3.0</version>
+        <version>6.4.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-ebinterface</artifactId>
-        <version>6.1.6</version>
+        <version>6.2.0</version>
       </dependency>
       <dependency>
         <groupId>com.helger.peppol</groupId>
         <artifactId>peppol-commons-parent-pom</artifactId>
-        <version>8.1.6</version>
+        <version>8.1.7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>at.austriapro</groupId>
         <artifactId>ebinterface-ubl-mapping</artifactId>
-        <version>4.5.8</version>
+        <version>4.6.0</version>
       </dependency>
       <dependency>
         <groupId>com.helger.bdve</groupId>
@@ -109,14 +109,14 @@
       <dependency>
         <groupId>com.helger.bdve.rules</groupId>
         <artifactId>ph-bdve-rules-parent-pom</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>en16931-cii2ubl</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

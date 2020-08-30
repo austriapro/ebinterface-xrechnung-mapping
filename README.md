@@ -49,6 +49,10 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.0.8 - 2020-08-30
+    * Updated to ph-ubl 6.4.0
+    * Updated to ph-ebinterface 6.2.0
+    * Updated to ebinterface-ubl-mapping 4.6.0
 * v1.0.7 - 2020-06-08
     * Updated to ph-bdve 6.0.0
 * v1.0.6 - 2020-05-27
