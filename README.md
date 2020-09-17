@@ -49,6 +49,8 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.0.9 - 2020-09-17
+    * Updated to Jakarta JAXB 2.3.3
 * v1.0.8 - 2020-08-30
     * Updated to ph-ubl 6.4.0
     * Updated to ph-ebinterface 6.2.0
