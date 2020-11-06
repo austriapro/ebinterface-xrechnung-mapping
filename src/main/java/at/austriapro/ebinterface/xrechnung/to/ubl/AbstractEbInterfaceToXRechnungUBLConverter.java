@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 
 import com.helger.commons.math.MathHelper;
 
+import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.InvoiceLineType;
@@ -43,15 +44,29 @@ import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
  */
 public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungConverter
 {
-  public AbstractEbInterfaceToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
+
+  /**
+   * Constructor.
+   *
+   * @param aDisplayLocale
+   *        The display locale, e.g. used for the error message. May not be
+   *        <code>null</code>.
+   * @param aContentLocale
+   *        The content locale of the invoice. May not be <code>null</code>.
+   * @param eXRechnungVersion
+   *        The target XRechnung version. May not be <code>null</code>.
+   */
+  public AbstractEbInterfaceToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
+                                                     @Nonnull final Locale aContentLocale,
+                                                     @Nonnull final EXRechnungVersion eXRechnungVersion)
   {
-    super (aDisplayLocale, aContentLocale);
+    super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }
 
-  public static void modifyDefaultUBLInvoice (@Nonnull final InvoiceType aInvoice)
+  public void modifyDefaultUBLInvoice (@Nonnull final InvoiceType aInvoice)
   {
     if (aInvoice.getCustomizationID () == null)
-      aInvoice.setCustomizationID ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2");
+      aInvoice.setCustomizationID (m_eXRechnungVersion.getCustomizationID ());
 
     if (aInvoice.getBuyerReference () == null)
       if (aInvoice.getOrderReference () != null)

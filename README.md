@@ -49,6 +49,8 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.1.0 - 2020-11-06
+    * Added support for creating XRechnung 2.0.0 documents
 * v1.0.9 - 2020-09-17
     * Updated to Jakarta JAXB 2.3.3
 * v1.0.8 - 2020-08-30

@@ -31,6 +31,7 @@ import com.helger.jaxb.validation.WrappedCollectingValidationEventHandler;
 import com.helger.ubl21.UBL21Writer;
 
 import at.austriapro.ebinterface.ubl.to.EbInterface60ToInvoiceConverter;
+import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.validator.XRechnungValidator;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
@@ -45,9 +46,22 @@ public class EbInterface60ToXRechnungUBLConverter extends AbstractEbInterfaceToX
   private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V60;
   private static final String VERSION_STR = "ebInterface " + VERSION.getVersion ().getAsStringMajorMinor ();
 
-  public EbInterface60ToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
+  /**
+   * Constructor.
+   *
+   * @param aDisplayLocale
+   *        The display locale, e.g. used for the error message. May not be
+   *        <code>null</code>.
+   * @param aContentLocale
+   *        The content locale of the invoice. May not be <code>null</code>.
+   * @param eXRechnungVersion
+   *        The target XRechnung version. May not be <code>null</code>.
+   */
+  public EbInterface60ToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
+                                               @Nonnull final Locale aContentLocale,
+                                               @Nonnull final EXRechnungVersion eXRechnungVersion)
   {
-    super (aDisplayLocale, aContentLocale);
+    super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }
 
   /**
@@ -97,7 +111,7 @@ public class EbInterface60ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     nErrorsBefore = nErrorsAfters;
     nWarnsBefore = nWarnsAfters;
 
-    XRechnungValidator.validateXRechnungUBLInvoice (aUBLDoc, aTransformErrorList);
+    XRechnungValidator.validateXRechnung (m_eXRechnungVersion.getVESID_UBLInvoice (), aUBLDoc, aTransformErrorList);
 
     nErrorsAfters = aTransformErrorList.getErrorCount ();
     nWarnsAfters = countWarnings (aTransformErrorList);

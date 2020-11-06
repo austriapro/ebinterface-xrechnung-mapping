@@ -47,11 +47,11 @@ public final class ValidateTestFilesFuncTest
   }
 
   @Test
-  public void testXRechnungUBL ()
+  public void testXRechnungUBL122 ()
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
@@ -63,11 +63,11 @@ public final class ValidateTestFilesFuncTest
   }
 
   @Test
-  public void testXRechnungCII ()
+  public void testXRechnungCII122 ()
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 

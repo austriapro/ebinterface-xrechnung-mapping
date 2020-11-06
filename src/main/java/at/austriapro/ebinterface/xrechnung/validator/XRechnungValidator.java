@@ -47,7 +47,7 @@ public final class XRechnungValidator
   private XRechnungValidator ()
   {}
 
-  private static void _validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
+  public static void validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (aVESID);
     if (aVES == null)
@@ -57,20 +57,5 @@ public final class XRechnungValidator
     // Main validation
     final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
     aValidationResult.forEachFlattened (aErrorList::add);
-  }
-
-  public static void validateXRechnungCII (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_CII_122, aNode, aErrorList);
-  }
-
-  public static void validateXRechnungUBLInvoice (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122, aNode, aErrorList);
-  }
-
-  public static void validateXRechnungUBLCreditNote (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_122, aNode, aErrorList);
   }
 }
