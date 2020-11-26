@@ -2,9 +2,9 @@ package at.austriapro.ebinterface.xrechnung;
 
 import javax.annotation.Nonnull;
 
-import com.helger.bdve.api.executorset.VESID;
-import com.helger.bdve.xrechnung.XRechnungValidation;
 import com.helger.commons.annotation.Nonempty;
+import com.helger.phive.api.executorset.VESID;
+import com.helger.phive.xrechnung.XRechnungValidation;
 
 /**
  * XRechnung version specifics.
