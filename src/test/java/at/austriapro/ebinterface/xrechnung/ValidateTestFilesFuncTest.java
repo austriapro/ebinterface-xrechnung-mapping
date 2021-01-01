@@ -23,17 +23,17 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.bdve.api.execute.ValidationExecutionManager;
-import com.helger.bdve.api.executorset.IValidationExecutorSet;
-import com.helger.bdve.api.executorset.ValidationExecutorSetRegistry;
-import com.helger.bdve.api.result.ValidationResultList;
-import com.helger.bdve.en16931.EN16931Validation;
-import com.helger.bdve.engine.source.IValidationSourceXML;
-import com.helger.bdve.engine.source.ValidationSourceXML;
-import com.helger.bdve.xrechnung.XRechnungValidation;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.io.resource.FileSystemResource;
+import com.helger.phive.api.execute.ValidationExecutionManager;
+import com.helger.phive.api.executorset.IValidationExecutorSet;
+import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
+import com.helger.phive.api.result.ValidationResultList;
+import com.helger.phive.en16931.EN16931Validation;
+import com.helger.phive.engine.source.IValidationSourceXML;
+import com.helger.phive.engine.source.ValidationSourceXML;
+import com.helger.phive.xrechnung.XRechnungValidation;
 
 public final class ValidateTestFilesFuncTest
 {
@@ -47,11 +47,11 @@ public final class ValidateTestFilesFuncTest
   }
 
   @Test
-  public void testXRechnungUBL ()
+  public void testXRechnungUBL122 ()
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
@@ -63,11 +63,11 @@ public final class ValidateTestFilesFuncTest
   }
 
   @Test
-  public void testXRechnungCII ()
+  public void testXRechnungCII122 ()
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 

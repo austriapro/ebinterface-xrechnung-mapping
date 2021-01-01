@@ -19,7 +19,10 @@ import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
+import com.helger.commons.ValueEnforcer;
+
 import at.austriapro.ebinterface.xrechnung.AbstractEbInterfaceXRechnungConverter;
+import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 
 /**
  * Base class for converting an ebInterface invoice to an XRechnung.
@@ -28,9 +31,35 @@ import at.austriapro.ebinterface.xrechnung.AbstractEbInterfaceXRechnungConverter
  */
 public abstract class AbstractEbInterfaceToXRechnungConverter extends AbstractEbInterfaceXRechnungConverter
 {
+  protected final EXRechnungVersion m_eXRechnungVersion;
+
+  /**
+   * Constructor.
+   *
+   * @param aDisplayLocale
+   *        The display locale, e.g. used for the error message. May not be
+   *        <code>null</code>.
+   * @param aContentLocale
+   *        The content locale of the invoice. May not be <code>null</code>.
+   * @param eXRechnungVersion
+   *        The target XRechnung version. May not be <code>null</code>.
+   */
   protected AbstractEbInterfaceToXRechnungConverter (@Nonnull final Locale aDisplayLocale,
-                                                     @Nonnull final Locale aContentLocale)
+                                                     @Nonnull final Locale aContentLocale,
+                                                     @Nonnull final EXRechnungVersion eXRechnungVersion)
   {
     super (aDisplayLocale, aContentLocale);
+    ValueEnforcer.notNull (eXRechnungVersion, "XRechnungVersion");
+    m_eXRechnungVersion = eXRechnungVersion;
+  }
+
+  /**
+   * @return The target XRechnung version for which the files should be created.
+   *         Never <code>null</code>.
+   */
+  @Nonnull
+  public final EXRechnungVersion getXRechnungVersion ()
+  {
+    return m_eXRechnungVersion;
   }
 }

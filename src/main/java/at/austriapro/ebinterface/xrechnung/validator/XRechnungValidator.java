@@ -19,16 +19,16 @@ import javax.annotation.Nonnull;
 
 import org.w3c.dom.Node;
 
-import com.helger.bdve.api.execute.ValidationExecutionManager;
-import com.helger.bdve.api.executorset.IValidationExecutorSet;
-import com.helger.bdve.api.executorset.VESID;
-import com.helger.bdve.api.executorset.ValidationExecutorSetRegistry;
-import com.helger.bdve.api.result.ValidationResultList;
-import com.helger.bdve.en16931.EN16931Validation;
-import com.helger.bdve.engine.source.IValidationSourceXML;
-import com.helger.bdve.engine.source.ValidationSourceXML;
-import com.helger.bdve.xrechnung.XRechnungValidation;
 import com.helger.commons.error.list.ErrorList;
+import com.helger.phive.api.execute.ValidationExecutionManager;
+import com.helger.phive.api.executorset.IValidationExecutorSet;
+import com.helger.phive.api.executorset.VESID;
+import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
+import com.helger.phive.api.result.ValidationResultList;
+import com.helger.phive.en16931.EN16931Validation;
+import com.helger.phive.engine.source.IValidationSourceXML;
+import com.helger.phive.engine.source.ValidationSourceXML;
+import com.helger.phive.xrechnung.XRechnungValidation;
 
 /**
  * Validate created XRechnung elements.
@@ -47,7 +47,7 @@ public final class XRechnungValidator
   private XRechnungValidator ()
   {}
 
-  private static void _validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
+  public static void validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (aVESID);
     if (aVES == null)
@@ -57,20 +57,5 @@ public final class XRechnungValidator
     // Main validation
     final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
     aValidationResult.forEachFlattened (aErrorList::add);
-  }
-
-  public static void validateXRechnungCII (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_CII_122, aNode, aErrorList);
-  }
-
-  public static void validateXRechnungUBLInvoice (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122, aNode, aErrorList);
-  }
-
-  public static void validateXRechnungUBLCreditNote (@Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
-  {
-    _validateXRechnung (XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_122, aNode, aErrorList);
   }
 }

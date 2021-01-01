@@ -25,7 +25,7 @@
   </parent>
   <groupId>at.austriapro</groupId>
   <artifactId>ebinterface-xrechnung-mapping</artifactId>
-  <version>1.0.10-SNAPSHOT</version>
+  <version>1.1.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>ebinterface-xrechnung-mapping</name>
   <inceptionYear>2019</inceptionYear>
@@ -64,7 +64,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-commons-parent-pom</artifactId>
-        <version>9.5.1</version>
+        <version>9.5.3</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -90,33 +90,33 @@
       <dependency>
         <groupId>com.helger.peppol</groupId>
         <artifactId>peppol-commons-parent-pom</artifactId>
-        <version>8.2.5</version>
+        <version>8.3.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>at.austriapro</groupId>
         <artifactId>ebinterface-ubl-mapping</artifactId>
-        <version>4.6.1</version>
+        <version>4.6.3</version>
       </dependency>
       <dependency>
-        <groupId>com.helger.bdve</groupId>
-        <artifactId>ph-bdve-parent-pom</artifactId>
-        <version>6.0.3</version>
+        <groupId>com.helger.phive</groupId>
+        <artifactId>phive-parent-pom</artifactId>
+        <version>7.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>com.helger.bdve.rules</groupId>
-        <artifactId>ph-bdve-rules-parent-pom</artifactId>
-        <version>1.0.8</version>
+        <groupId>com.helger.phive.rules</groupId>
+        <artifactId>phive-rules-parent-pom</artifactId>
+        <version>2.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>en16931-cii2ubl</artifactId>
-        <version>1.2.3</version>
+        <version>1.2.5</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -161,8 +161,8 @@
       <artifactId>ebinterface-ubl-mapping</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.helger.bdve.rules</groupId>
-      <artifactId>ph-bdve-rules-xrechnung</artifactId>
+      <groupId>com.helger.phive.rules</groupId>
+      <artifactId>phive-rules-xrechnung</artifactId>
     </dependency>
 
     <dependency>

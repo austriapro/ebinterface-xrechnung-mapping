@@ -36,6 +36,7 @@ import com.helger.ebinterface.builder.EbInterfaceReader;
 import com.helger.ebinterface.v41.Ebi41InvoiceType;
 import com.helger.ubl21.UBL21Writer;
 
+import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
@@ -57,26 +58,29 @@ public final class EbInterface41ToXRechnungUBLConverterTest
   @Test
   public void testBasic ()
   {
-    final EbInterface41ToXRechnungUBLConverter aToXRechnung = new EbInterface41ToXRechnungUBLConverter (LOC, LOC);
+    for (final EXRechnungVersion eXRechnungVersion : EXRechnungVersion.values ())
+    {
+      final EbInterface41ToXRechnungUBLConverter aToXRechnung = new EbInterface41ToXRechnungUBLConverter (LOC, LOC, eXRechnungVersion);
 
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi41")).withFilter (IFileFilter.filenameEndsWith (".xml")))
-      if (!IGNORE_FILES.contains (aFile.getName ()))
-      {
-        LOGGER.info ("Reading '" + aFile.getName () + "'");
+      for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi41")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+        if (!IGNORE_FILES.contains (aFile.getName ()))
+        {
+          LOGGER.info ("Reading '" + aFile.getName () + "'");
 
-        final Ebi41InvoiceType aEbi = EbInterfaceReader.ebInterface41 ().read (aFile);
-        assertNotNull (aEbi);
+          final Ebi41InvoiceType aEbi = EbInterfaceReader.ebInterface41 ().read (aFile);
+          assertNotNull (aEbi);
 
-        // To UBL
-        final ErrorList aErrorList = new ErrorList ();
-        final InvoiceType aInvoice = aToXRechnung.convert (aEbi, aErrorList);
-        assertNotNull (aInvoice);
+          // To UBL
+          final ErrorList aErrorList = new ErrorList ();
+          final InvoiceType aInvoice = aToXRechnung.convert (aEbi, aErrorList);
+          assertNotNull (aInvoice);
 
-        if (aErrorList.containsAtLeastOneError ())
-          LOGGER.info (UBL21Writer.invoice ().setFormattedOutput (true).getAsString (aInvoice));
+          if (aErrorList.containsAtLeastOneError ())
+            LOGGER.info (UBL21Writer.invoice ().setFormattedOutput (true).getAsString (aInvoice));
 
-        aErrorList.findAll (IError::isError, x -> LOGGER.info (x.getAsString (LOC)));
-        assertTrue (aErrorList.containsNoError ());
-      }
+          aErrorList.findAll (IError::isError, x -> LOGGER.info (x.getAsString (LOC)));
+          assertTrue (aErrorList.containsNoError ());
+        }
+    }
   }
 }
