@@ -45,9 +45,9 @@ public final class XRechnungCIIInvoiceToEbInterface40ConverterTest
   private static final ICommonsSet <String> IGNORED_FILES = new CommonsHashSet <> ("01.04a-INVOICE_uncefact.xml");
 
   @Test
-  public void testBasic ()
+  public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
       if (!IGNORED_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");

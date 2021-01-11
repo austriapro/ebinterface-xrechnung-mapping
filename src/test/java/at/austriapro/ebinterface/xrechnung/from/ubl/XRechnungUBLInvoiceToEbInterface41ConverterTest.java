@@ -41,9 +41,9 @@ public final class XRechnungUBLInvoiceToEbInterface41ConverterTest
   private static final Locale LOC = Locale.GERMAN;
 
   @Test
-  public void testBasic ()
+  public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
     {
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 

@@ -45,9 +45,9 @@ public final class XRechnungUBLInvoiceToEbInterface40ConverterTest
   private static final ICommonsSet <String> IGNORED_FILES = new CommonsHashSet <> ("01.04a-INVOICE_ubl.xml");
 
   @Test
-  public void testBasic ()
+  public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
       if (!IGNORED_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");

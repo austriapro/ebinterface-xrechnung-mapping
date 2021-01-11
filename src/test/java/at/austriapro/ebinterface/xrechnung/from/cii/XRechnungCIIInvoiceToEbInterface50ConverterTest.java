@@ -41,9 +41,9 @@ public final class XRechnungCIIInvoiceToEbInterface50ConverterTest
   private static final Locale LOC = Locale.GERMAN;
 
   @Test
-  public void testBasic ()
+  public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 
