@@ -11,6 +11,7 @@ import com.helger.phive.xrechnung.XRechnungValidation;
  *
  * @author Philip Helger
  */
+@SuppressWarnings ("deprecation")
 public enum EXRechnungVersion
 {
   // Valid from 1.7.2020 - 31.12.2020
@@ -22,7 +23,12 @@ public enum EXRechnungVersion
   V200 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0",
         XRechnungValidation.VID_XRECHNUNG_CII_200,
         XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_200,
-        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_200);
+        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_200), // Valid from
+                                                               // 01.01.2021
+  V201 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0",
+        XRechnungValidation.VID_XRECHNUNG_CII_201,
+        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_201,
+        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_201);
 
   private final String m_sCustomizationID;
   private final VESID m_aCII;
