@@ -51,6 +51,10 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.1.2 - 2020-01-11
+    * Updated to conform to EN16931 rules 1.3.3
+* v1.1.1 - 2020-11-26
+    * Version updates
 * v1.1.0 - 2020-11-06
     * Added support for creating XRechnung 2.0.0 documents
 * v1.0.9 - 2020-09-17

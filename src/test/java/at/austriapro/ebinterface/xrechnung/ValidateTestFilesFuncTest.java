@@ -35,6 +35,7 @@ import com.helger.phive.engine.source.IValidationSourceXML;
 import com.helger.phive.engine.source.ValidationSourceXML;
 import com.helger.phive.xrechnung.XRechnungValidation;
 
+@SuppressWarnings ("deprecation")
 public final class ValidateTestFilesFuncTest
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (ValidateTestFilesFuncTest.class);
