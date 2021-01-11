@@ -26,6 +26,7 @@ import com.helger.commons.math.MathHelper;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.InvoiceLineType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.ItemType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyLegalEntityType;
@@ -34,6 +35,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.Par
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PaymentTermsType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PriceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.DocumentTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.NoteType;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
@@ -44,7 +46,6 @@ import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
  */
 public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungConverter
 {
-
   /**
    * Constructor.
    *
@@ -71,6 +72,13 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
     if (aInvoice.getBuyerReference () == null)
       if (aInvoice.getOrderReference () != null)
         aInvoice.setBuyerReference (aInvoice.getOrderReference ().getIDValue ());
+
+    // This became an error in EN-16931
+    // 130 is allowed for Invoice
+    // 130, 50 is allowed for CreditNote
+    for (final DocumentReferenceType aDocRef : aInvoice.getAdditionalDocumentReference ())
+      if (!"130".equals (aDocRef.getDocumentTypeCodeValue ()))
+        aDocRef.setDocumentTypeCode ((DocumentTypeCodeType) null);
 
     final SupplierPartyType aSupplier = aInvoice.getAccountingSupplierParty ();
     if (aSupplier != null)
