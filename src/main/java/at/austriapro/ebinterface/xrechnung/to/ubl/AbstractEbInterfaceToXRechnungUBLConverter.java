@@ -16,11 +16,11 @@
 package at.austriapro.ebinterface.xrechnung.to.ubl;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
+import com.helger.commons.datetime.OffsetDate;
 import com.helger.commons.math.MathHelper;
 
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
@@ -157,9 +157,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
         if (aPT.getNote ().isEmpty ())
         {
           // Ensure that a note is present, to work around the wrong Schematron
-          final LocalDate aDueDate = aPT.getPaymentDueDateValue ();
+          final OffsetDate aDueDate = aPT.getPaymentDueDateValue ();
           if (aDueDate != null)
-            aPT.addNote (new NoteType ("Due at " + aDueDate.toString ()));
+            aPT.addNote (new NoteType ("Due at " + aDueDate.getAsString ()));
         }
       }
     }

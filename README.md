@@ -51,6 +51,8 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.2.0 - 2021-03-22
+    * Updated to ph-commons 10
 * v1.1.2 - 2021-01-11
     * Updated to conform to EN16931 rules 1.3.3
     * Updated to en16931-cii2ubl 1.3.0
