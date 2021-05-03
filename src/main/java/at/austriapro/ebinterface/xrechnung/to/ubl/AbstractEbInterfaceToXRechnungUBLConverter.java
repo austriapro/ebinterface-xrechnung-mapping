@@ -20,7 +20,7 @@ import java.util.Locale;
 
 import javax.annotation.Nonnull;
 
-import com.helger.commons.datetime.OffsetDate;
+import com.helger.commons.datetime.XMLOffsetDate;
 import com.helger.commons.math.MathHelper;
 
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
@@ -157,7 +157,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
         if (aPT.getNote ().isEmpty ())
         {
           // Ensure that a note is present, to work around the wrong Schematron
-          final OffsetDate aDueDate = aPT.getPaymentDueDateValue ();
+          final XMLOffsetDate aDueDate = aPT.getPaymentDueDateValue ();
           if (aDueDate != null)
             aPT.addNote (new NoteType ("Due at " + aDueDate.getAsString ()));
         }
