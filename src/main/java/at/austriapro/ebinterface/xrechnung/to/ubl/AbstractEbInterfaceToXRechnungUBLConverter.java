@@ -159,7 +159,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
           // Ensure that a note is present, to work around the wrong Schematron
           final XMLOffsetDate aDueDate = aPT.getPaymentDueDateValue ();
           if (aDueDate != null)
-            aPT.addNote (new NoteType ("Due at " + aDueDate.getAsString ()));
+            aPT.addNote (new NoteType ("Due at " + aDueDate.toString ()));
         }
       }
     }
