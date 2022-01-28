@@ -30,20 +30,25 @@ import com.helger.phive.xrechnung.XRechnungValidation;
 public enum EXRechnungVersion
 {
   // Valid from 1.7.2020 - 31.12.2020
-  V122 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2",
-        XRechnungValidation.VID_XRECHNUNG_CII_122,
-        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122,
-        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_122),
+  V12 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_1.2",
+       XRechnungValidation.VID_XRECHNUNG_CII_122,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_122),
   // Valid from 01.01.2021
-  V200 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0",
-        XRechnungValidation.VID_XRECHNUNG_CII_200,
-        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_200,
-        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_200), // Valid from
-                                                               // 01.01.2021
-  V201 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0",
-        XRechnungValidation.VID_XRECHNUNG_CII_201,
-        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_201,
-        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_201);
+  V20 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.0",
+       XRechnungValidation.VID_XRECHNUNG_CII_201,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_201,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_201),
+  // Valid from 01.02.2022
+  V21 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.1",
+       XRechnungValidation.VID_XRECHNUNG_CII_211,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_211,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_211),
+  // Valid from 01.08.2022
+  V22 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2",
+       XRechnungValidation.VID_XRECHNUNG_CII_220,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_220,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_220);
 
   private final String m_sCustomizationID;
   private final VESID m_aCII;
