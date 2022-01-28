@@ -35,7 +35,7 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 * `EbInterface50ToXRechnungUBLConverter` - convert from ebInterface v5.0
 * `EbInterface60ToXRechnungUBLConverter` - convert from ebInterface v6.0
 
-The current supported XRechnung target versions are 1.2.2 and 2.0.0.
+The current supported XRechnung target versions are 1.2.2, 2.0.1, 2.1.1 and 2.2.0.
 
 # Maven usage
 
@@ -51,6 +51,8 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v1.3.1 - work in progress
+    * Added support for XRechnung 2.2
 * v1.3.0 - 2021-05-02
     * Updated to ph-commons 10.1
 * v1.2.0 - 2021-03-22
