@@ -25,44 +25,44 @@ import org.slf4j.LoggerFactory;
 
 import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.EEbInterfaceVersion;
-import com.helger.ebinterface.v43.Ebi43InvoiceType;
+import com.helger.ebinterface.v61.Ebi61InvoiceType;
 
-import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface43Converter;
-import at.austriapro.ebinterface.ubl.from.invoice.InvoiceToEbInterface43Converter;
+import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface61Converter;
+import at.austriapro.ebinterface.ubl.from.invoice.InvoiceToEbInterface61Converter;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Convert XRechnung UBL to ebInterface 4.3
+ * Convert XRechnung UBL to ebInterface 6.1
  *
  * @author Philip Helger
  */
-public class XRechnungUBLInvoiceToEbInterface43Converter extends AbstractXRechnungUBLToEbInterfaceConverter
+public class XRechnungUBLInvoiceToEbInterface61Converter extends AbstractXRechnungUBLToEbInterfaceConverter
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface43Converter.class);
-  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V43;
+  private static final Logger LOGGER = LoggerFactory.getLogger (XRechnungUBLInvoiceToEbInterface61Converter.class);
+  private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V61;
   private static final String VERSION_STR = "ebInterface " + VERSION.getVersion ().getAsStringMajorMinor ();
 
-  private ICustomInvoiceToEbInterface43Converter m_aCustomizer;
+  private ICustomInvoiceToEbInterface61Converter m_aCustomizer;
 
-  public XRechnungUBLInvoiceToEbInterface43Converter (@Nonnull final Locale aDisplayLocale,
+  public XRechnungUBLInvoiceToEbInterface61Converter (@Nonnull final Locale aDisplayLocale,
                                                       @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
   @Nonnull
-  public XRechnungUBLInvoiceToEbInterface43Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface43Converter aCustomizer)
+  public XRechnungUBLInvoiceToEbInterface61Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface61Converter aCustomizer)
   {
     m_aCustomizer = aCustomizer;
     return this;
   }
 
   @Nullable
-  public Ebi43InvoiceType convert (@Nonnull final InvoiceType aUBLInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public Ebi61InvoiceType convert (@Nonnull final InvoiceType aUBLInvoice, @Nonnull final ErrorList aTransformErrorList)
   {
     final int nErrorsBefore = aTransformErrorList.getErrorCount ();
     final int nWarnsBefore = countWarnings (aTransformErrorList);
-    final Ebi43InvoiceType ret = new InvoiceToEbInterface43Converter (m_aDisplayLocale,
+    final Ebi61InvoiceType ret = new InvoiceToEbInterface61Converter (m_aDisplayLocale,
                                                                       m_aContentLocale,
                                                                       m_aToEbiSettings).setCustomizer (m_aCustomizer)
                                                                                        .convertToEbInterface (aUBLInvoice,

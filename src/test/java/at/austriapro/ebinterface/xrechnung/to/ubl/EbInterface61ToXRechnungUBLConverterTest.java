@@ -33,44 +33,41 @@ import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.locale.LocaleCache;
 import com.helger.ebinterface.builder.EbInterfaceReader;
-import com.helger.ebinterface.v40.Ebi40InvoiceType;
+import com.helger.ebinterface.v61.Ebi61InvoiceType;
 import com.helger.ubl21.UBL21Writer;
 
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
- * Test class for class {@link EbInterface40ToXRechnungUBLConverter}.
+ * Test class for class {@link EbInterface61ToXRechnungUBLConverter}.
  *
  * @author Philip Helger
  */
-public final class EbInterface40ToXRechnungUBLConverterTest
+public final class EbInterface61ToXRechnungUBLConverterTest
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface40ToXRechnungUBLConverterTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface61ToXRechnungUBLConverterTest.class);
   private static final Locale LOC = LocaleCache.getInstance ().getLocale ("de", "AT");
 
-  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ("ERAT_EBI40_sample1.xml",
-                                                                                  "ERAT_EBI40_sample2.xml",
-                                                                                  "ERAT_EBI40_sample3.xml",
-                                                                                  "Invoice_SAR15-000867_20150903_10_04_26.xml",
-                                                                                  "Invoice_SAR15-000868_20150903_10_11_43.xml",
-                                                                                  "Invoice_SAR15-000869_20150903_12_06_47.xml");
+  private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ("ebinterface_6p1_sample_dokumentation.xml",
+                                                                                  "ebinterface_6p1_sample_ecosio.xml",
+                                                                                  "ebinterface_6p1_sample_more_consistent.xml");
 
   @Test
   public void testBasic ()
   {
     for (final EXRechnungVersion eXRechnungVersion : EXRechnungVersion.values ())
     {
-      final EbInterface40ToXRechnungUBLConverter aToXRechnung = new EbInterface40ToXRechnungUBLConverter (LOC,
+      final EbInterface61ToXRechnungUBLConverter aToXRechnung = new EbInterface61ToXRechnungUBLConverter (LOC,
                                                                                                           LOC,
                                                                                                           eXRechnungVersion);
 
-      for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi40")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+      for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi61")).withFilter (IFileFilter.filenameEndsWith (".xml")))
         if (!IGNORE_FILES.contains (aFile.getName ()))
         {
           LOGGER.info ("Reading '" + aFile.getName () + "' for conversion to " + eXRechnungVersion);
 
-          final Ebi40InvoiceType aEbi = EbInterfaceReader.ebInterface40 ().read (aFile);
+          final Ebi61InvoiceType aEbi = EbInterfaceReader.ebInterface61 ().read (aFile);
           assertNotNull (aEbi);
 
           // To UBL

@@ -57,9 +57,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
    * @param eXRechnungVersion
    *        The target XRechnung version. May not be <code>null</code>.
    */
-  public AbstractEbInterfaceToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
-                                                     @Nonnull final Locale aContentLocale,
-                                                     @Nonnull final EXRechnungVersion eXRechnungVersion)
+  protected AbstractEbInterfaceToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
+                                                        @Nonnull final Locale aContentLocale,
+                                                        @Nonnull final EXRechnungVersion eXRechnungVersion)
   {
     super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }

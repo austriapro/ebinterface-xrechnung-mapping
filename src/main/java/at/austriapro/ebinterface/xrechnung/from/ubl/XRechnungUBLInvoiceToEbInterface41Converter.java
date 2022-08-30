@@ -44,7 +44,8 @@ public class XRechnungUBLInvoiceToEbInterface41Converter extends AbstractXRechnu
 
   private ICustomInvoiceToEbInterface41Converter m_aCustomizer;
 
-  public XRechnungUBLInvoiceToEbInterface41Converter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
+  public XRechnungUBLInvoiceToEbInterface41Converter (@Nonnull final Locale aDisplayLocale,
+                                                      @Nonnull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
@@ -69,10 +70,18 @@ public class XRechnungUBLInvoiceToEbInterface41Converter extends AbstractXRechnu
     final int nErrorsAfters = aTransformErrorList.getErrorCount ();
     final int nWarnsAfters = countWarnings (aTransformErrorList);
     if (nWarnsAfters > nWarnsBefore)
-      LOGGER.warn ("The conversion from UBL to " + VERSION_STR + " found " + warningText (nWarnsAfters - nWarnsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from UBL to " +
+                     VERSION_STR +
+                     " found " +
+                     warningText (nWarnsAfters - nWarnsBefore));
     if (nErrorsAfters > nErrorsBefore)
     {
-      LOGGER.warn ("The conversion from UBL to " + VERSION_STR + " found " + errorText (nErrorsAfters - nErrorsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from UBL to " +
+                     VERSION_STR +
+                     " found " +
+                     errorText (nErrorsAfters - nErrorsBefore));
       return null;
     }
 

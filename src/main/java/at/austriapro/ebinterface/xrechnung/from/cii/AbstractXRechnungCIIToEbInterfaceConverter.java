@@ -63,10 +63,12 @@ public abstract class AbstractXRechnungCIIToEbInterfaceConverter extends Abstrac
     final int nErrorsAfters = aErrorList.getErrorCount ();
     final int nWarnsAfters = countWarnings (aErrorList);
     if (nWarnsAfters > nWarnsBefore)
-      LOGGER.warn ("The conversion from CII to UBL found " + warningText (nWarnsAfters - nWarnsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from CII to UBL found " + warningText (nWarnsAfters - nWarnsBefore));
     if (nErrorsAfters > nErrorsBefore)
     {
-      LOGGER.warn ("The conversion from CII to UBL found " + errorText (nErrorsAfters - nErrorsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from CII to UBL found " + errorText (nErrorsAfters - nErrorsBefore));
       return null;
     }
 

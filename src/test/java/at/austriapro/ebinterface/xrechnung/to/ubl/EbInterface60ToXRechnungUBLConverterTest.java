@@ -56,12 +56,14 @@ public final class EbInterface60ToXRechnungUBLConverterTest
   {
     for (final EXRechnungVersion eXRechnungVersion : EXRechnungVersion.values ())
     {
-      final EbInterface60ToXRechnungUBLConverter aToXRechnung = new EbInterface60ToXRechnungUBLConverter (LOC, LOC, eXRechnungVersion);
+      final EbInterface60ToXRechnungUBLConverter aToXRechnung = new EbInterface60ToXRechnungUBLConverter (LOC,
+                                                                                                          LOC,
+                                                                                                          eXRechnungVersion);
 
       for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi60")).withFilter (IFileFilter.filenameEndsWith (".xml")))
         if (!IGNORE_FILES.contains (aFile.getName ()))
         {
-          LOGGER.info ("Reading '" + aFile.getName () + "'");
+          LOGGER.info ("Reading '" + aFile.getName () + "' for conversion to " + eXRechnungVersion);
 
           final Ebi60InvoiceType aEbi = EbInterfaceReader.ebInterface60 ().read (aFile);
           assertNotNull (aEbi);

@@ -82,7 +82,8 @@ public class EbInterface41ToXRechnungUBLConverter extends AbstractEbInterfaceToX
   public InvoiceType convert (@Nonnull final Ebi41InvoiceType aEbiInvoice, @Nonnull final ErrorList aTransformErrorList)
   {
     // Convert ebInterface to UBL
-    final InvoiceType aUBLInvoice = new EbInterface41ToInvoiceConverter (m_aDisplayLocale, m_aContentLocale).convertInvoice (aEbiInvoice);
+    final InvoiceType aUBLInvoice = new EbInterface41ToInvoiceConverter (m_aDisplayLocale,
+                                                                         m_aContentLocale).convertInvoice (aEbiInvoice);
     assert aUBLInvoice != null;
 
     // set XRechnung specific values
@@ -100,10 +101,18 @@ public class EbInterface41ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     int nErrorsAfters = aTransformErrorList.getErrorCount ();
     int nWarnsAfters = countWarnings (aTransformErrorList);
     if (nWarnsAfters > nWarnsBefore)
-      LOGGER.warn ("The conversion from " + VERSION_STR + " to UBL found " + warningText (nWarnsAfters - nWarnsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from " +
+                     VERSION_STR +
+                     " to UBL found " +
+                     warningText (nWarnsAfters - nWarnsBefore));
     if (nErrorsAfters > nErrorsBefore)
     {
-      LOGGER.warn ("The conversion from " + VERSION_STR + " to UBL found " + errorText (nErrorsAfters - nErrorsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The conversion from " +
+                     VERSION_STR +
+                     " to UBL found " +
+                     errorText (nErrorsAfters - nErrorsBefore));
       return null;
     }
 
@@ -119,10 +128,12 @@ public class EbInterface41ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     {
       // A lot of warnings are "unexpected element"
       if (nWarnsAfters > nWarnsBefore)
-        LOGGER.warn ("The validation of the XRechnung found " + warningText (nWarnsAfters - nWarnsBefore));
+        if (LOGGER.isWarnEnabled ())
+          LOGGER.warn ("The validation of the XRechnung found " + warningText (nWarnsAfters - nWarnsBefore));
     }
     if (nErrorsAfters > nErrorsBefore)
-      LOGGER.warn ("The validation of the XRechnung found " + errorText (nErrorsAfters - nErrorsBefore));
+      if (LOGGER.isWarnEnabled ())
+        LOGGER.warn ("The validation of the XRechnung found " + errorText (nErrorsAfters - nErrorsBefore));
 
     return aUBLInvoice;
   }
