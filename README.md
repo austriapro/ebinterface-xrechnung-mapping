@@ -14,6 +14,7 @@ To convert an XRechnung UBL to ebInterface use the following classes:
 * `XRechnungUBLInvoiceToEbInterface43Converter` - convert to ebInterface v4.3
 * `XRechnungUBLInvoiceToEbInterface50Converter` - convert to ebInterface v5.0
 * `XRechnungUBLInvoiceToEbInterface60Converter` - convert to ebInterface v6.0
+* `XRechnungUBLInvoiceToEbInterface61Converter` - convert to ebInterface v6.1
 
 ## XRechnung CII to ebInterface
 
@@ -24,6 +25,7 @@ To convert an XRechnung CII to ebInterface use the following classes:
 * `XRechnungCIIInvoiceToEbInterface43Converter` - convert to ebInterface v4.3
 * `XRechnungCIIInvoiceToEbInterface50Converter` - convert to ebInterface v5.0
 * `XRechnungCIIInvoiceToEbInterface60Converter` - convert to ebInterface v6.0
+* `XRechnungCIIInvoiceToEbInterface61Converter` - convert to ebInterface v6.1
 
 ## ebInterface to XRechnung UBL
 
@@ -34,6 +36,7 @@ To convert an ebInterface to an XRechnung UBL use the following classes:
 * `EbInterface43ToXRechnungUBLConverter` - convert from ebInterface v4.3
 * `EbInterface50ToXRechnungUBLConverter` - convert from ebInterface v5.0
 * `EbInterface60ToXRechnungUBLConverter` - convert from ebInterface v6.0
+* `EbInterface61ToXRechnungUBLConverter` - convert from ebInterface v6.1
 
 The current supported XRechnung target versions are 1.2.2, 2.0.1, 2.1.1 and 2.2.0.
 
@@ -51,8 +54,9 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
-* v1.3.1 - work in progress
+* v1.4.0 - 2022-10-12
     * Added support for XRechnung 2.2
+    * Added support for ebInterface 6.1
 * v1.3.0 - 2021-05-02
     * Updated to ph-commons 10.1
 * v1.2.0 - 2021-03-22
