@@ -61,6 +61,11 @@
 				<LineItemAmount>10</LineItemAmount>
 			</ListLineItem>
 		</ItemList>
+    <BelowTheLineItem>
+      <Description>Test B-T-L</Description>
+      <LineItemAmount>1.5</LineItemAmount>
+      <Reason Date="2022-01-19">any</Reason>
+    </BelowTheLineItem>
 	</Details>
 	<Tax>
 		<TaxItem>
@@ -70,7 +75,7 @@
 		</TaxItem>
 	</Tax>
 	<TotalGrossAmount>12</TotalGrossAmount>
-	<PayableAmount>12</PayableAmount>
+	<PayableAmount>13.5</PayableAmount>
 	<PaymentMethod>
 		<Comment>Zahlbar per Überweisung. Bitte SEPA Voraussetzungen berücksichtigen.</Comment>
 		<UniversalBankTransaction ConsolidatorPayable="true">

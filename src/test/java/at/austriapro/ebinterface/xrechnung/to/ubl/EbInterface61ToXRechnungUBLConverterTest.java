@@ -51,16 +51,15 @@ public final class EbInterface61ToXRechnungUBLConverterTest
 
   private static final ICommonsSet <String> IGNORE_FILES = new CommonsHashSet <> ("ebinterface_6p1_sample_dokumentation.xml",
                                                                                   "ebinterface_6p1_sample_ecosio.xml",
-                                                                                  "ebinterface_6p1_sample_more_consistent.xml");
+                                                                                  "ebinterface_6p1_sample_more_consistent.xml",
+                                                                                  "ebinterface_6p1_sample_ph2-below-the-line.xml");
 
   @Test
   public void testBasic ()
   {
     for (final EXRechnungVersion eXRechnungVersion : EXRechnungVersion.values ())
     {
-      final EbInterface61ToXRechnungUBLConverter aToXRechnung = new EbInterface61ToXRechnungUBLConverter (LOC,
-                                                                                                          LOC,
-                                                                                                          eXRechnungVersion);
+      final EbInterface61ToXRechnungUBLConverter aToXRechnung = new EbInterface61ToXRechnungUBLConverter (LOC, LOC, eXRechnungVersion);
 
       for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi61")).withFilter (IFileFilter.filenameEndsWith (".xml")))
         if (!IGNORE_FILES.contains (aFile.getName ()))
