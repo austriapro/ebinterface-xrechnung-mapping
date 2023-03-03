@@ -54,6 +54,10 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v2.0.0 - 2023-03-03
+    * Using Java 11 as the baseline
+    * Updated to ph-commons 11
+    * Using JAXB 4.0 as the baseline
 * v1.4.0 - 2022-10-12
     * Added support for XRechnung 2.2
     * Added support for ebInterface 6.1
