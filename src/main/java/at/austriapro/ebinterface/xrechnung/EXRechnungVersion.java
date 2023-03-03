@@ -48,7 +48,12 @@ public enum EXRechnungVersion
   V22 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.2",
        XRechnungValidation.VID_XRECHNUNG_CII_220,
        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_220,
-       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_220);
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_220),
+  // Valid from 01.08.2023
+  V23 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.3",
+       XRechnungValidation.VID_XRECHNUNG_CII_231,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_231,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_231);
 
   private final String m_sCustomizationID;
   private final VESID m_aCII;
