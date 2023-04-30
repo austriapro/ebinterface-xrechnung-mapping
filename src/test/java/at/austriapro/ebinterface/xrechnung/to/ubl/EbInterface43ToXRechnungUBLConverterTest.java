@@ -60,7 +60,7 @@ public final class EbInterface43ToXRechnungUBLConverterTest
                                                                                                           LOC,
                                                                                                           eXRechnungVersion);
 
-      for (final File aFile : new FileSystemIterator (new File ("src/test/resources/ebinterface/ebi43")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+      for (final File aFile : new FileSystemIterator (new File ("src/test/resources/external/ebinterface/ebi43")).withFilter (IFileFilter.filenameEndsWith (".xml")))
         if (!IGNORE_FILES.contains (aFile.getName ()))
         {
           LOGGER.info ("Reading '" + aFile.getName () + "' for conversion to " + eXRechnungVersion);

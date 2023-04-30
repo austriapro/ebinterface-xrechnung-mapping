@@ -52,13 +52,14 @@ public final class ValidateTestFilesFuncTest
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/external/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
       // What to validate?
       final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES,
+                                                                                                   aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
   }
@@ -68,13 +69,14 @@ public final class ValidateTestFilesFuncTest
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (XRechnungValidation.VID_XRECHNUNG_CII_122);
 
-    for (final File f : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File f : new FileSystemIterator (new File ("src/test/resources/external/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
     {
       LOGGER.info ("Validating " + f.getName ());
 
       // What to validate?
       final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES,
+                                                                                                   aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
   }

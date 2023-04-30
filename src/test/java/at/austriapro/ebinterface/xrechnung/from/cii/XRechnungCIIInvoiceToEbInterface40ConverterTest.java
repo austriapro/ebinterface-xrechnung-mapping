@@ -47,7 +47,7 @@ public final class XRechnungCIIInvoiceToEbInterface40ConverterTest
   @Test
   public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/external/xrechnung/122/cii")).withFilter (IFileFilter.filenameEndsWith (".xml")))
       if (!IGNORED_FILES.contains (aFile.getName ()))
       {
         LOGGER.info ("Reading '" + aFile.getName () + "'");

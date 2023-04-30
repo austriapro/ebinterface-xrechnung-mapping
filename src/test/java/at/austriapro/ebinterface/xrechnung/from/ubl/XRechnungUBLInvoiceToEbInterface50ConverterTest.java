@@ -43,7 +43,7 @@ public final class XRechnungUBLInvoiceToEbInterface50ConverterTest
   @Test
   public void testXRechnung122 ()
   {
-    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
+    for (final File aFile : new FileSystemIterator (new File ("src/test/resources/external/xrechnung/122/ubl")).withFilter (IFileFilter.filenameEndsWith ("_ubl.xml")))
     {
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 
