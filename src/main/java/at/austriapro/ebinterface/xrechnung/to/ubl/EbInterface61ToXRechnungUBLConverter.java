@@ -28,7 +28,7 @@ import com.helger.commons.error.list.ErrorList;
 import com.helger.ebinterface.EEbInterfaceVersion;
 import com.helger.ebinterface.v61.Ebi61InvoiceType;
 import com.helger.jaxb.validation.WrappedCollectingValidationEventHandler;
-import com.helger.ubl21.UBL21Writer;
+import com.helger.ubl21.UBL21Marshaller;
 
 import at.austriapro.ebinterface.ubl.to.EbInterface61ToInvoiceConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
@@ -92,9 +92,9 @@ public class EbInterface61ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     // Check if UBL matches the XSD
     int nErrorsBefore = aTransformErrorList.getErrorCount ();
     int nWarnsBefore = countWarnings (aTransformErrorList);
-    final Document aUBLDoc = UBL21Writer.invoice ()
-                                        .setValidationEventHandler (new WrappedCollectingValidationEventHandler (aTransformErrorList))
-                                        .getAsDocument (aUBLInvoice);
+    final Document aUBLDoc = UBL21Marshaller.invoice ()
+                                            .setValidationEventHandler (new WrappedCollectingValidationEventHandler (aTransformErrorList))
+                                            .getAsDocument (aUBLInvoice);
     if (aUBLDoc == null)
       return null;
 

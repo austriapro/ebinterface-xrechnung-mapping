@@ -29,9 +29,9 @@ import com.helger.commons.error.list.ErrorList;
 import com.helger.commons.error.list.IErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
-import com.helger.ebinterface.builder.EbInterfaceValidator;
+import com.helger.ebinterface.EbInterface60Marshaller;
 import com.helger.ebinterface.v60.Ebi60InvoiceType;
-import com.helger.ubl21.UBL21Reader;
+import com.helger.ubl21.UBL21Marshaller;
 
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
@@ -48,17 +48,20 @@ public final class XRechnungUBLInvoiceToEbInterface60ConverterTest
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 
       // Read as UBL
-      final InvoiceType aUBLInvoice = UBL21Reader.invoice ().read (aFile);
+      final InvoiceType aUBLInvoice = UBL21Marshaller.invoice ().read (aFile);
       assertNotNull (aUBLInvoice);
 
       // Convert to ebInterface
       final ErrorList aTransformErrorList = new ErrorList ();
-      final Ebi60InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface60Converter (LOC, LOC).convert (aUBLInvoice, aTransformErrorList);
-      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (), aTransformErrorList.containsNoError ());
+      final Ebi60InvoiceType aEbi = new XRechnungUBLInvoiceToEbInterface60Converter (LOC,
+                                                                                     LOC).convert (aUBLInvoice,
+                                                                                                   aTransformErrorList);
+      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
+                  aTransformErrorList.containsNoError ());
       assertNotNull (aEbi);
 
       // Validate ebInterface
-      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface60 ().validate (aEbi);
+      final IErrorList aValidationErrors = new EbInterface60Marshaller ().validate (aEbi);
       assertNotNull (aValidationErrors);
       assertTrue (aValidationErrors.getAllErrors ().toString (), aValidationErrors.containsNoError ());
     }

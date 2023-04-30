@@ -25,12 +25,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.helger.cii.d16b.CIID16BReader;
+import com.helger.cii.d16b.CIID16BCrossIndustryInvoiceTypeMarshaller;
 import com.helger.commons.error.list.ErrorList;
 import com.helger.commons.error.list.IErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
-import com.helger.ebinterface.builder.EbInterfaceValidator;
+import com.helger.ebinterface.EbInterface42Marshaller;
 import com.helger.ebinterface.v42.Ebi42InvoiceType;
 
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
@@ -48,17 +48,20 @@ public final class XRechnungCIIInvoiceToEbInterface42ConverterTest
       LOGGER.info ("Reading '" + aFile.getName () + "'");
 
       // Read as CII
-      final CrossIndustryInvoiceType aCIIInvoice = CIID16BReader.crossIndustryInvoice ().read (aFile);
+      final CrossIndustryInvoiceType aCIIInvoice = new CIID16BCrossIndustryInvoiceTypeMarshaller ().read (aFile);
       assertNotNull (aCIIInvoice);
 
       // Convert to ebInterface
       final ErrorList aTransformErrorList = new ErrorList ();
-      final Ebi42InvoiceType aEbi = new XRechnungCIIInvoiceToEbInterface42Converter (LOC, LOC).convert (aCIIInvoice, aTransformErrorList);
-      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (), aTransformErrorList.containsNoError ());
+      final Ebi42InvoiceType aEbi = new XRechnungCIIInvoiceToEbInterface42Converter (LOC,
+                                                                                     LOC).convert (aCIIInvoice,
+                                                                                                   aTransformErrorList);
+      assertTrue ("Errors:  " + aTransformErrorList.getAllErrors ().toString (),
+                  aTransformErrorList.containsNoError ());
       assertNotNull (aEbi);
 
       // Validate ebInterface
-      final IErrorList aValidationErrors = EbInterfaceValidator.ebInterface42 ().validate (aEbi);
+      final IErrorList aValidationErrors = new EbInterface42Marshaller ().validate (aEbi);
       assertNotNull (aValidationErrors);
       assertTrue (aValidationErrors.getAllErrors ().toString (), aValidationErrors.containsNoError ());
     }

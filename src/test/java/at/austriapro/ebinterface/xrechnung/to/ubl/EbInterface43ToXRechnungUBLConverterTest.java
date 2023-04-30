@@ -32,9 +32,9 @@ import com.helger.commons.error.list.ErrorList;
 import com.helger.commons.io.file.FileSystemIterator;
 import com.helger.commons.io.file.IFileFilter;
 import com.helger.commons.locale.LocaleCache;
-import com.helger.ebinterface.builder.EbInterfaceReader;
+import com.helger.ebinterface.EbInterface43Marshaller;
 import com.helger.ebinterface.v43.Ebi43InvoiceType;
-import com.helger.ubl21.UBL21Writer;
+import com.helger.ubl21.UBL21Marshaller;
 
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
@@ -65,7 +65,7 @@ public final class EbInterface43ToXRechnungUBLConverterTest
         {
           LOGGER.info ("Reading '" + aFile.getName () + "' for conversion to " + eXRechnungVersion);
 
-          final Ebi43InvoiceType aEbi = EbInterfaceReader.ebInterface43 ().read (aFile);
+          final Ebi43InvoiceType aEbi = new EbInterface43Marshaller ().read (aFile);
           assertNotNull (aEbi);
 
           // To UBL
@@ -74,7 +74,7 @@ public final class EbInterface43ToXRechnungUBLConverterTest
           assertNotNull (aInvoice);
 
           if (aErrorList.containsAtLeastOneError ())
-            LOGGER.info (UBL21Writer.invoice ().setFormattedOutput (true).getAsString (aInvoice));
+            LOGGER.info (UBL21Marshaller.invoice ().setFormattedOutput (true).getAsString (aInvoice));
 
           aErrorList.findAll (IHasErrorLevel::isError, x -> LOGGER.info (x.getAsString (LOC)));
           assertTrue (aErrorList.containsNoError ());
