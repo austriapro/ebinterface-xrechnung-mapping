@@ -101,18 +101,10 @@ public class EbInterface50ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     int nErrorsAfters = aTransformErrorList.getErrorCount ();
     int nWarnsAfters = countWarnings (aTransformErrorList);
     if (nWarnsAfters > nWarnsBefore)
-      if (LOGGER.isWarnEnabled ())
-        LOGGER.warn ("The conversion from " +
-                     VERSION_STR +
-                     " to UBL found " +
-                     warningText (nWarnsAfters - nWarnsBefore));
+      LOGGER.warn ("The conversion from " + VERSION_STR + " to UBL found " + warningText (nWarnsAfters - nWarnsBefore));
     if (nErrorsAfters > nErrorsBefore)
     {
-      if (LOGGER.isWarnEnabled ())
-        LOGGER.warn ("The conversion from " +
-                     VERSION_STR +
-                     " to UBL found " +
-                     errorText (nErrorsAfters - nErrorsBefore));
+      LOGGER.warn ("The conversion from " + VERSION_STR + " to UBL found " + errorText (nErrorsAfters - nErrorsBefore));
       return null;
     }
 
@@ -128,12 +120,10 @@ public class EbInterface50ToXRechnungUBLConverter extends AbstractEbInterfaceToX
     {
       // A lot of warnings are "unexpected element"
       if (nWarnsAfters > nWarnsBefore)
-        if (LOGGER.isWarnEnabled ())
-          LOGGER.warn ("The validation of the XRechnung found " + warningText (nWarnsAfters - nWarnsBefore));
+        LOGGER.warn ("The validation of the XRechnung found " + warningText (nWarnsAfters - nWarnsBefore));
     }
     if (nErrorsAfters > nErrorsBefore)
-      if (LOGGER.isWarnEnabled ())
-        LOGGER.warn ("The validation of the XRechnung found " + errorText (nErrorsAfters - nErrorsBefore));
+      LOGGER.warn ("The validation of the XRechnung found " + errorText (nErrorsAfters - nErrorsBefore));
 
     return aUBLInvoice;
   }

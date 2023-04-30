@@ -70,18 +70,10 @@ public class XRechnungUBLInvoiceToEbInterface41Converter extends AbstractXRechnu
     final int nErrorsAfters = aTransformErrorList.getErrorCount ();
     final int nWarnsAfters = countWarnings (aTransformErrorList);
     if (nWarnsAfters > nWarnsBefore)
-      if (LOGGER.isWarnEnabled ())
-        LOGGER.warn ("The conversion from UBL to " +
-                     VERSION_STR +
-                     " found " +
-                     warningText (nWarnsAfters - nWarnsBefore));
+      LOGGER.warn ("The conversion from UBL to " + VERSION_STR + " found " + warningText (nWarnsAfters - nWarnsBefore));
     if (nErrorsAfters > nErrorsBefore)
     {
-      if (LOGGER.isWarnEnabled ())
-        LOGGER.warn ("The conversion from UBL to " +
-                     VERSION_STR +
-                     " found " +
-                     errorText (nErrorsAfters - nErrorsBefore));
+      LOGGER.warn ("The conversion from UBL to " + VERSION_STR + " found " + errorText (nErrorsAfters - nErrorsBefore));
       return null;
     }
 
