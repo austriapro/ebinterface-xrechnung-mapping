@@ -59,6 +59,10 @@ public final class EbInterface42ToXRechnungUBLConverterTest
       final EbInterface42ToXRechnungUBLConverter aToXRechnung = new EbInterface42ToXRechnungUBLConverter (LOC,
                                                                                                           LOC,
                                                                                                           eXRechnungVersion);
+      aToXRechnung.setSupplierEndpointIDScheme ("0088")
+                  .setSupplierEndpointID ("supplier")
+                  .setCustomerEndpointIDScheme ("0204")
+                  .setCustomerEndpointID ("customer");
 
       for (final File aFile : new FileSystemIterator (new File ("src/test/resources/external/ebinterface/ebi42")).withFilter (IFileFilter.filenameEndsWith (".xml")))
         if (!IGNORE_FILES.contains (aFile.getName ()))

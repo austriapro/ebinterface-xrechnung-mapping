@@ -20,14 +20,14 @@ import javax.annotation.Nonnull;
 import org.w3c.dom.Node;
 
 import com.helger.commons.error.list.ErrorList;
+import com.helger.diver.api.version.VESID;
 import com.helger.phive.api.execute.ValidationExecutionManager;
 import com.helger.phive.api.executorset.IValidationExecutorSet;
-import com.helger.phive.api.executorset.VESID;
 import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
 import com.helger.phive.api.result.ValidationResultList;
 import com.helger.phive.en16931.EN16931Validation;
-import com.helger.phive.engine.source.IValidationSourceXML;
-import com.helger.phive.engine.source.ValidationSourceXML;
+import com.helger.phive.xml.source.IValidationSourceXML;
+import com.helger.phive.xml.source.ValidationSourceXML;
 import com.helger.phive.xrechnung.XRechnungValidation;
 
 /**

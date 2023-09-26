@@ -18,7 +18,7 @@ package at.austriapro.ebinterface.xrechnung;
 import javax.annotation.Nonnull;
 
 import com.helger.commons.annotation.Nonempty;
-import com.helger.phive.api.executorset.VESID;
+import com.helger.diver.api.version.VESID;
 import com.helger.phive.xrechnung.XRechnungValidation;
 
 /**
@@ -53,7 +53,12 @@ public enum EXRechnungVersion
   V23 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_2.3",
        XRechnungValidation.VID_XRECHNUNG_CII_231,
        XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_231,
-       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_231);
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_231),
+  // Valid from 01.02.2024
+  V30 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_3.0",
+       XRechnungValidation.VID_XRECHNUNG_CII_301,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_301,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_301);
 
   private final String m_sCustomizationID;
   private final VESID m_aCII;
@@ -76,6 +81,13 @@ public enum EXRechnungVersion
   public String getCustomizationID ()
   {
     return m_sCustomizationID;
+  }
+
+  @Nonnull
+  @Nonempty
+  public String getProfileID ()
+  {
+    return "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0";
   }
 
   @Nonnull

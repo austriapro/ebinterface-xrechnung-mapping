@@ -40,7 +40,8 @@ import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
  *
  * @author Philip Helger
  */
-public class EbInterface60ToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungUBLConverter
+public class EbInterface60ToXRechnungUBLConverter extends
+                                                  AbstractEbInterfaceToXRechnungUBLConverter <EbInterface60ToXRechnungUBLConverter>
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (EbInterface60ToXRechnungUBLConverter.class);
   private static final EEbInterfaceVersion VERSION = EEbInterfaceVersion.V60;

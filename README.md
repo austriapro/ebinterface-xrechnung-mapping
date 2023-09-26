@@ -1,5 +1,9 @@
 # ebinterface-xrechnung-mapping
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/at.austriapro/ebinterface-xrechnung-mapping/badge.svg)](https://maven-badges.herokuapp.com/maven-central/at.austriapro/ebinterface-xrechnung-mapping) 
+[![javadoc](https://javadoc.io/badge2/at.austriapro/ebinterface-xrechnung-mapping/javadoc.svg)](https://javadoc.io/doc/at.austriapro/ebinterface-xrechnung-mapping)
+[![CodeCov](https://codecov.io/gh/austriapro/ebinterface-xrechnung-mapping/branch/master/graph/badge.svg)](https://codecov.io/gh/austriapro/ebinterface-xrechnung-mapping)
+
 Mapping between ebInterface and the German XRechnung UBL.
 This is a library to convert between the two formats.
 There is no assigned user interface or the like.
@@ -54,6 +58,11 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v2.2.0 - 2023-09-26
+    * Updated to phive 9.x
+    * Updated to ebinterface-ubl-mapping 5.1.1
+    * Setting UBL XRechnung Profile ID to a default value
+    * Added support for XRechnung 3.0
 * v2.1.0 - 2023-04-30
     * Updated to ph-ubl 8.x
 * v2.0.0 - 2023-03-03

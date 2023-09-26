@@ -31,8 +31,8 @@ import com.helger.phive.api.executorset.IValidationExecutorSet;
 import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
 import com.helger.phive.api.result.ValidationResultList;
 import com.helger.phive.en16931.EN16931Validation;
-import com.helger.phive.engine.source.IValidationSourceXML;
-import com.helger.phive.engine.source.ValidationSourceXML;
+import com.helger.phive.xml.source.IValidationSourceXML;
+import com.helger.phive.xml.source.ValidationSourceXML;
 import com.helger.phive.xrechnung.XRechnungValidation;
 
 @SuppressWarnings ("deprecation")

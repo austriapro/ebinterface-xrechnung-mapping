@@ -19,9 +19,12 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.helger.commons.datetime.XMLOffsetDate;
 import com.helger.commons.math.MathHelper;
+import com.helger.commons.string.StringHelper;
+import com.helger.commons.traits.IGenericImplTrait;
 
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
@@ -43,9 +46,19 @@ import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
  * Base class for converting an ebInterface invoice to an XRechnung UBL.
  *
  * @author Philip Helger
+ * @param <IMPLTYPE>
+ *        The implementation type.
  */
-public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends AbstractEbInterfaceToXRechnungConverter
+public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE extends AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE>>
+                                                                 extends
+                                                                 AbstractEbInterfaceToXRechnungConverter implements
+                                                                 IGenericImplTrait <IMPLTYPE>
 {
+  private String m_sSupplierEndpointIDScheme;
+  private String m_sSupplierEndpointID;
+  private String m_sCustomerEndpointIDScheme;
+  private String m_sCustomerEndpointID;
+
   /**
    * Constructor.
    *
@@ -64,10 +77,115 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
     super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }
 
+  /**
+   * @return The supplier EndpointID schemeID. May be <code>null</code>.
+   * @since 2.1.1
+   */
+  @Nullable
+  public final String getSupplierEndpointIDScheme ()
+  {
+    return m_sSupplierEndpointIDScheme;
+  }
+
+  /**
+   * Set the supplier EndpointID schemeID. This is required for XRechnung 3.0
+   * onwards.
+   *
+   * @param s
+   *        Endpoint ID scheme ID
+   * @return this for chaining
+   * @since 2.1.1
+   */
+  @Nonnull
+  public final IMPLTYPE setSupplierEndpointIDScheme (@Nullable final String s)
+  {
+    m_sSupplierEndpointIDScheme = s;
+    return thisAsT ();
+  }
+
+  /**
+   * @return The supplier EndpointID. May be <code>null</code>.
+   * @since 2.1.1
+   */
+  @Nullable
+  public final String getSupplierEndpointID ()
+  {
+    return m_sSupplierEndpointID;
+  }
+
+  /**
+   * Set the supplier EndpointID. This is required for XRechnung 3.0 onwards.
+   *
+   * @param s
+   *        Endpoint ID
+   * @return this for chaining
+   * @since 2.1.1
+   */
+  @Nonnull
+  public final IMPLTYPE setSupplierEndpointID (@Nullable final String s)
+  {
+    m_sSupplierEndpointID = s;
+    return thisAsT ();
+  }
+
+  /**
+   * @return The customer EndpointID schemeID. May be <code>null</code>.
+   * @since 2.1.1
+   */
+  @Nullable
+  public final String getCustomerEndpointIDScheme ()
+  {
+    return m_sCustomerEndpointIDScheme;
+  }
+
+  /**
+   * Set the customer EndpointID schemeID. This is required for XRechnung 3.0
+   * onwards.
+   *
+   * @param s
+   *        Endpoint ID scheme ID
+   * @return this for chaining
+   * @since 2.1.1
+   */
+  @Nonnull
+  public final IMPLTYPE setCustomerEndpointIDScheme (@Nullable final String s)
+  {
+    m_sCustomerEndpointIDScheme = s;
+    return thisAsT ();
+  }
+
+  /**
+   * @return The customer EndpointID. May be <code>null</code>.
+   * @since 2.1.1
+   */
+  @Nullable
+  public final String getCustomerEndpointID ()
+  {
+    return m_sCustomerEndpointID;
+  }
+
+  /**
+   * Set the customer EndpointID. This is required for XRechnung 3.0 onwards.
+   *
+   * @param s
+   *        Endpoint ID
+   * @return this for chaining
+   * @since 2.1.1
+   */
+  @Nonnull
+  public final IMPLTYPE setCustomerEndpointID (@Nullable final String s)
+  {
+    m_sCustomerEndpointID = s;
+    return thisAsT ();
+  }
+
   public void modifyDefaultUBLInvoice (@Nonnull final InvoiceType aInvoice)
   {
     if (aInvoice.getCustomizationID () == null)
       aInvoice.setCustomizationID (m_eXRechnungVersion.getCustomizationID ());
+
+    if (aInvoice.getProfileID () == null)
+      aInvoice.setProfileID (m_eXRechnungVersion.getProfileID ());
 
     if (aInvoice.getBuyerReference () == null)
       if (aInvoice.getOrderReference () != null)
@@ -97,6 +215,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
             aParty.addPartyLegalEntity (aPLE);
           }
         }
+
+        if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
+          aParty.setEndpointID (m_sSupplierEndpointID).setSchemeID (m_sSupplierEndpointIDScheme);
       }
     }
 
@@ -117,6 +238,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter extends Abstrac
             aParty.addPartyLegalEntity (aPLE);
           }
         }
+
+        if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
+          aParty.setEndpointID (m_sCustomerEndpointID).setSchemeID (m_sCustomerEndpointIDScheme);
       }
     }
 
