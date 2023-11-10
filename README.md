@@ -58,6 +58,8 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v2.2.1 - 2023-11-10
+    * Updated to ebinterface-ubl-mapping 5.1.2
 * v2.2.0 - 2023-09-26
     * Updated to phive 9.x
     * Updated to ebinterface-ubl-mapping 5.1.1
