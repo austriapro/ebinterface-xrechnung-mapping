@@ -26,6 +26,7 @@ import com.helger.commons.math.MathHelper;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.traits.IGenericImplTrait;
 
+import at.austriapro.ebinterface.ubl.AbstractConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
@@ -186,6 +187,12 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
 
     if (aInvoice.getProfileID () == null)
       aInvoice.setProfileID (m_eXRechnungVersion.getProfileID ());
+
+    if (AbstractConverter.INVOICE_TYPE_CODE_FINAL_PAYMENT.equals (aInvoice.getInvoiceTypeCodeValue ()))
+    {
+      // 218 is not allowed in the EN -> change to 380
+      aInvoice.setInvoiceTypeCode (AbstractConverter.INVOICE_TYPE_CODE_INVOICE);
+    }
 
     if (aInvoice.getBuyerReference () == null)
       if (aInvoice.getOrderReference () != null)
