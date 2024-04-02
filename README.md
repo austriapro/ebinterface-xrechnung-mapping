@@ -58,6 +58,9 @@ Add the following to your pom.xml to use this artifact, replacing `x.y.z` with t
 
 # News and noteworthy
 
+* v2.2.2 - 2024-04-02
+    * Updated to ebinterface-ubl-mapping 5.2.0
+    * Ensured Java 21 compatibility
 * v2.2.1 - 2023-11-10
     * Updated to ebinterface-ubl-mapping 5.1.2
 * v2.2.0 - 2023-09-26
