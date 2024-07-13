@@ -82,7 +82,7 @@
             <cbc:ID>DE12123000001234567890</cbc:ID>
             <cbc:Name>[Payment account name]</cbc:Name>
             <cac:FinancialInstitutionBranch>
-                <cbc:ID>[BIC]</cbc:ID>
+                <cbc:ID>BKAUATWW</cbc:ID>
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>

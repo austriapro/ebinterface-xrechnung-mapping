@@ -201,7 +201,7 @@
                     <ram:AccountName>[Payment account name]</ram:AccountName>
                 </ram:PayeePartyCreditorFinancialAccount>
                 <ram:PayeeSpecifiedCreditorFinancialInstitution>
-                    <ram:BICID>[BIC]</ram:BICID>
+                    <ram:BICID>BKAUATWW</ram:BICID>
                 </ram:PayeeSpecifiedCreditorFinancialInstitution>
             </ram:SpecifiedTradeSettlementPaymentMeans>
             <ram:ApplicableTradeTax>
