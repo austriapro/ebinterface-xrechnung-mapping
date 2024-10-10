@@ -18,7 +18,7 @@ package at.austriapro.ebinterface.xrechnung;
 import javax.annotation.Nonnull;
 
 import com.helger.commons.annotation.Nonempty;
-import com.helger.diver.api.version.VESID;
+import com.helger.diver.api.coord.DVRCoordinate;
 import com.helger.phive.xrechnung.XRechnungValidation;
 
 /**
@@ -61,14 +61,14 @@ public enum EXRechnungVersion
        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_301);
 
   private final String m_sCustomizationID;
-  private final VESID m_aCII;
-  private final VESID m_aUBLInvoice;
-  private final VESID m_aUBLCreditNote;
+  private final DVRCoordinate m_aCII;
+  private final DVRCoordinate m_aUBLInvoice;
+  private final DVRCoordinate m_aUBLCreditNote;
 
   EXRechnungVersion (@Nonnull @Nonempty final String sCustomizationID,
-                     @Nonnull final VESID aCII,
-                     @Nonnull final VESID aUBLInvoice,
-                     @Nonnull final VESID aUBLCreditNote)
+                     @Nonnull final DVRCoordinate aCII,
+                     @Nonnull final DVRCoordinate aUBLInvoice,
+                     @Nonnull final DVRCoordinate aUBLCreditNote)
   {
     m_sCustomizationID = sCustomizationID;
     m_aCII = aCII;
@@ -91,19 +91,19 @@ public enum EXRechnungVersion
   }
 
   @Nonnull
-  public VESID getVESID_CII ()
+  public DVRCoordinate getVESID_CII ()
   {
     return m_aCII;
   }
 
   @Nonnull
-  public VESID getVESID_UBLInvoice ()
+  public DVRCoordinate getVESID_UBLInvoice ()
   {
     return m_aUBLInvoice;
   }
 
   @Nonnull
-  public VESID getVESID_UBLCreditNote ()
+  public DVRCoordinate getVESID_UBLCreditNote ()
   {
     return m_aUBLCreditNote;
   }

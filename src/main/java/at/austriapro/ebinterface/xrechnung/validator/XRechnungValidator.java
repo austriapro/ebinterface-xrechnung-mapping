@@ -20,11 +20,12 @@ import javax.annotation.Nonnull;
 import org.w3c.dom.Node;
 
 import com.helger.commons.error.list.ErrorList;
-import com.helger.diver.api.version.VESID;
+import com.helger.diver.api.coord.DVRCoordinate;
 import com.helger.phive.api.execute.ValidationExecutionManager;
 import com.helger.phive.api.executorset.IValidationExecutorSet;
 import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
 import com.helger.phive.api.result.ValidationResultList;
+import com.helger.phive.api.validity.IValidityDeterminator;
 import com.helger.phive.en16931.EN16931Validation;
 import com.helger.phive.xml.source.IValidationSourceXML;
 import com.helger.phive.xml.source.ValidationSourceXML;
@@ -47,7 +48,9 @@ public final class XRechnungValidator
   private XRechnungValidator ()
   {}
 
-  public static void validateXRechnung (@Nonnull final VESID aVESID, @Nonnull final Node aNode, @Nonnull final ErrorList aErrorList)
+  public static void validateXRechnung (@Nonnull final DVRCoordinate aVESID,
+                                        @Nonnull final Node aNode,
+                                        @Nonnull final ErrorList aErrorList)
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (aVESID);
     if (aVES == null)
@@ -55,7 +58,9 @@ public final class XRechnungValidator
     // What to validate?
     final IValidationSourceXML aValidationSource = ValidationSourceXML.create (null, aNode);
     // Main validation
-    final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES, aValidationSource);
+    final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (IValidityDeterminator.createDefault (),
+                                                                                                 aVES,
+                                                                                                 aValidationSource);
     aValidationResult.forEachFlattened (aErrorList::add);
   }
 }

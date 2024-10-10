@@ -30,6 +30,7 @@ import com.helger.phive.api.execute.ValidationExecutionManager;
 import com.helger.phive.api.executorset.IValidationExecutorSet;
 import com.helger.phive.api.executorset.ValidationExecutorSetRegistry;
 import com.helger.phive.api.result.ValidationResultList;
+import com.helger.phive.api.validity.IValidityDeterminator;
 import com.helger.phive.en16931.EN16931Validation;
 import com.helger.phive.xml.source.IValidationSourceXML;
 import com.helger.phive.xml.source.ValidationSourceXML;
@@ -58,7 +59,8 @@ public final class ValidateTestFilesFuncTest
 
       // What to validate?
       final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES,
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (IValidityDeterminator.createDefault (),
+                                                                                                   aVES,
                                                                                                    aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
@@ -75,7 +77,8 @@ public final class ValidateTestFilesFuncTest
 
       // What to validate?
       final IValidationSourceXML aValidationSource = ValidationSourceXML.create (new FileSystemResource (f));
-      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (aVES,
+      final ValidationResultList aValidationResult = ValidationExecutionManager.executeValidation (IValidityDeterminator.createDefault (),
+                                                                                                   aVES,
                                                                                                    aValidationSource);
       assertFalse (aValidationResult.getAllErrors ().toString (), aValidationResult.containsAtLeastOneError ());
     }
