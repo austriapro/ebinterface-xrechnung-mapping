@@ -56,9 +56,9 @@ public enum EXRechnungVersion
        XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_231),
   // Valid from 01.02.2024
   V30 ("urn:cen.eu:en16931:2017#compliant#urn:xoev-de:kosit:standard:xrechnung_3.0",
-       XRechnungValidation.VID_XRECHNUNG_CII_301,
-       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_301,
-       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_301);
+       XRechnungValidation.VID_XRECHNUNG_CII_302,
+       XRechnungValidation.VID_XRECHNUNG_UBL_INVOICE_302,
+       XRechnungValidation.VID_XRECHNUNG_UBL_CREDITNOTE_302);
 
   private final String m_sCustomizationID;
   private final DVRCoordinate m_aCII;
