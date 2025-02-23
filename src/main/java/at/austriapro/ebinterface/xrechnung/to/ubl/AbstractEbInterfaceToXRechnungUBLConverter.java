@@ -21,6 +21,7 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.helger.commons.collection.impl.CommonsArrayList;
 import com.helger.commons.datetime.XMLOffsetDate;
 import com.helger.commons.math.MathHelper;
 import com.helger.commons.string.StringHelper;
@@ -225,6 +226,23 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
 
         if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
           aParty.setEndpointID (m_sSupplierEndpointID).setSchemeID (m_sSupplierEndpointIDScheme);
+
+        // Convert all FurtherIdentification to a Note instead
+        final StringBuilder aSB = new StringBuilder ();
+        for (final var aPI : new CommonsArrayList <> (aParty.getPartyIdentification ()))
+          if (aPI.getID () != null &&
+              AbstractConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ().getSchemeName ()))
+          {
+            if (aSB.length () > 0)
+              aSB.append ('\n');
+            else
+              aSB.append ("Supplier FurtherIdentification\n");
+            aSB.append (aPI.getID ().getSchemeID ()).append (" = ").append (aPI.getID ().getValue ());
+            // Remove from source list
+            aParty.getPartyIdentification ().remove (aPI);
+          }
+        if (aSB.length () > 0)
+          aInvoice.addNote (new NoteType (aSB.toString ()));
       }
     }
 
@@ -248,6 +266,23 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
 
         if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
           aParty.setEndpointID (m_sCustomerEndpointID).setSchemeID (m_sCustomerEndpointIDScheme);
+
+        // Convert all FurtherIdentification to a Note instead
+        final StringBuilder aSB = new StringBuilder ();
+        for (final var aPI : new CommonsArrayList <> (aParty.getPartyIdentification ()))
+          if (aPI.getID () != null &&
+              AbstractConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ().getSchemeName ()))
+          {
+            if (aSB.length () > 0)
+              aSB.append ('\n');
+            else
+              aSB.append ("Customer FurtherIdentification\n");
+            aSB.append (aPI.getID ().getSchemeID ()).append (" = ").append (aPI.getID ().getValue ());
+            // Remove from source list
+            aParty.getPartyIdentification ().remove (aPI);
+          }
+        if (aSB.length () > 0)
+          aInvoice.addNote (new NoteType (aSB.toString ()));
       }
     }
 
