@@ -22,12 +22,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.helger.commons.collection.impl.CommonsArrayList;
+import com.helger.commons.datetime.PDTToString;
 import com.helger.commons.datetime.XMLOffsetDate;
 import com.helger.commons.math.MathHelper;
 import com.helger.commons.string.StringHelper;
 import com.helger.commons.traits.IGenericImplTrait;
 
-import at.austriapro.ebinterface.ubl.AbstractConverter;
+import at.austriapro.ebinterface.ubl.AbstractEbInterfaceUBLConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
@@ -40,6 +41,7 @@ import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.Par
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PaymentTermsType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PriceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.AllowanceChargeReasonType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.DocumentTypeCodeType;
 import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.NoteType;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
@@ -189,11 +191,13 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
     if (aInvoice.getProfileID () == null)
       aInvoice.setProfileID (m_eXRechnungVersion.getProfileID ());
 
-    if (AbstractConverter.INVOICE_TYPE_CODE_FINAL_PAYMENT.equals (aInvoice.getInvoiceTypeCodeValue ()))
-    {
-      // 218 is not allowed in the EN -> change to 380
-      aInvoice.setInvoiceTypeCode (AbstractConverter.INVOICE_TYPE_CODE_INVOICE);
-    }
+    // Is allowed for XRechnung 2.0 and onwards
+    if (m_eXRechnungVersion.ordinal () < EXRechnungVersion.V20.ordinal ())
+      if (AbstractEbInterfaceUBLConverter.INVOICE_TYPE_CODE_FINAL_PAYMENT.equals (aInvoice.getInvoiceTypeCodeValue ()))
+      {
+        // 218 is not allowed in the EN -> change to 380
+        aInvoice.setInvoiceTypeCode (AbstractEbInterfaceUBLConverter.INVOICE_TYPE_CODE_INVOICE);
+      }
 
     if (aInvoice.getBuyerReference () == null)
       if (aInvoice.getOrderReference () != null)
@@ -231,12 +235,13 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
         final StringBuilder aSB = new StringBuilder ();
         for (final var aPI : new CommonsArrayList <> (aParty.getPartyIdentification ()))
           if (aPI.getID () != null &&
-              AbstractConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ().getSchemeName ()))
+              AbstractEbInterfaceUBLConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ()
+                                                                                                    .getSchemeName ()))
           {
             if (aSB.length () > 0)
               aSB.append ('\n');
             else
-              aSB.append ("Supplier FurtherIdentification\n");
+              aSB.append (EText.SUPPLIER_FI.getDisplayText (m_aContentLocale));
             aSB.append (aPI.getID ().getSchemeID ()).append (" = ").append (aPI.getID ().getValue ());
             // Remove from source list
             aParty.getPartyIdentification ().remove (aPI);
@@ -271,12 +276,13 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
         final StringBuilder aSB = new StringBuilder ();
         for (final var aPI : new CommonsArrayList <> (aParty.getPartyIdentification ()))
           if (aPI.getID () != null &&
-              AbstractConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ().getSchemeName ()))
+              AbstractEbInterfaceUBLConverter.FURTHER_IDENTIFICATION_SCHEME_NAME_EBI2UBL.equals (aPI.getID ()
+                                                                                                    .getSchemeName ()))
           {
             if (aSB.length () > 0)
               aSB.append ('\n');
             else
-              aSB.append ("Customer FurtherIdentification\n");
+              aSB.append (EText.CUSTOMER_FI.getDisplayText (m_aContentLocale));
             aSB.append (aPI.getID ().getSchemeID ()).append (" = ").append (aPI.getID ().getValue ());
             // Remove from source list
             aParty.getPartyIdentification ().remove (aPI);
@@ -310,6 +316,20 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
           aInvoiceLine.setInvoicedQuantity (aInvoiceLine.getInvoicedQuantityValue ().negate ());
         }
       }
+
+      for (final var aAllowanceCharge : aInvoiceLine.getAllowanceCharge ())
+      {
+        // One of those two is mandatory
+        if (aAllowanceCharge.hasNoAllowanceChargeReasonEntries () &&
+            aAllowanceCharge.getAllowanceChargeReasonCode () == null)
+        {
+          final AllowanceChargeReasonType aACR = new AllowanceChargeReasonType ();
+          aACR.setValue (aAllowanceCharge.getChargeIndicator ()
+                                         .isValue () ? EText.CHARGE.getDisplayText (m_aContentLocale)
+                                                     : EText.ALLOWANCE.getDisplayText (m_aContentLocale));
+          aAllowanceCharge.addAllowanceChargeReason (aACR);
+        }
+      }
     }
 
     // Work around for error "BR-CO-25" (error in CEN validation artefacts
@@ -325,7 +345,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
           // Ensure that a note is present, to work around the wrong Schematron
           final XMLOffsetDate aDueDate = aPT.getPaymentDueDateValue ();
           if (aDueDate != null)
-            aPT.addNote (new NoteType ("Due at " + aDueDate.toString ()));
+            aPT.addNote (new NoteType (EText.DUE_DATE.getDisplayTextWithArgs (m_aContentLocale,
+                                                                              PDTToString.getAsString (aDueDate,
+                                                                                                       m_aContentLocale))));
         }
       }
     }

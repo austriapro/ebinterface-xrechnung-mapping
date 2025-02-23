@@ -19,11 +19,17 @@ import java.util.Locale;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.helger.commons.ValueEnforcer;
 import com.helger.commons.annotation.Nonempty;
+import com.helger.commons.annotation.Translatable;
 import com.helger.commons.error.level.EErrorLevel;
 import com.helger.commons.error.list.IErrorList;
+import com.helger.commons.text.IMultilingualText;
+import com.helger.commons.text.display.IHasDisplayTextWithArgs;
+import com.helger.commons.text.resolve.DefaultTextResolver;
+import com.helger.commons.text.util.TextHelper;
 
 /**
  * Abstract base class for converter between XRechnung to ebInterface (in both
@@ -33,6 +39,34 @@ import com.helger.commons.error.list.IErrorList;
  */
 public abstract class AbstractEbInterfaceXRechnungConverter
 {
+  @Translatable
+  protected enum EText implements IHasDisplayTextWithArgs
+  {
+    WARNING_1 ("1 Warnung", "1 warning"),
+    WARNINGS_N ("{0} Warnungen", "{0} warnings"),
+    ERROR_1 ("1 Fehler", "1 error"),
+    ERRORS_N ("{0} Fehler", "{0} errors"),
+    SUPPLIER_FI ("Rechnungssteller weitere Informationen\n", "Supplier FurtherIdentification\n"),
+    CUSTOMER_FI ("Rechnungsempfänger weitere Informationen\n", "Customer FurtherIdentification\n"),
+    ALLOWANCE ("Abschlag", "Allowance"),
+    CHARGE ("Zuschlag", "Charge"),
+    DUE_DATE ("Fällig am {0}", "Due at {0}");
+
+    @Nonnull
+    private final IMultilingualText m_aTP;
+
+    EText (@Nonnull final String sDE, @Nonnull final String sEN)
+    {
+      m_aTP = TextHelper.create_DE_EN (sDE, sEN);
+    }
+
+    @Nullable
+    public String getDisplayText (@Nonnull final Locale aContentLocale)
+    {
+      return DefaultTextResolver.getTextStatic (this, m_aTP, aContentLocale);
+    }
+  }
+
   protected final Locale m_aDisplayLocale;
   protected final Locale m_aContentLocale;
 
@@ -53,15 +87,17 @@ public abstract class AbstractEbInterfaceXRechnungConverter
 
   @Nonnull
   @Nonempty
-  protected static final String warningText (@Nonnegative final int nWarn)
+  protected final String warningText (@Nonnegative final int nWarn)
   {
-    return nWarn == 1 ? "1 warning" : nWarn + " warnings";
+    return nWarn == 1 ? EText.WARNING_1.getDisplayText (m_aDisplayLocale)
+                      : EText.WARNINGS_N.getDisplayTextWithArgs (m_aDisplayLocale, Integer.toString (nWarn));
   }
 
   @Nonnull
   @Nonempty
-  protected static final String errorText (@Nonnegative final int nWarn)
+  protected final String errorText (@Nonnegative final int nErrs)
   {
-    return nWarn == 1 ? "1 error" : nWarn + " errors";
+    return nErrs == 1 ? EText.ERROR_1.getDisplayText (m_aDisplayLocale)
+                      : EText.ERRORS_N.getDisplayTextWithArgs (m_aDisplayLocale, Integer.toString (nErrs));
   }
 }

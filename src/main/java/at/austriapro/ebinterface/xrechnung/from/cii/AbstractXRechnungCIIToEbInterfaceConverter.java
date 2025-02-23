@@ -48,8 +48,8 @@ public abstract class AbstractXRechnungCIIToEbInterfaceConverter extends Abstrac
   }
 
   @Nullable
-  protected static InvoiceType convertCIIToUBL (@Nonnull final CrossIndustryInvoiceType aCIIInvoice,
-                                                @Nonnull final ErrorList aErrorList)
+  protected InvoiceType convertCIIToUBL (@Nonnull final CrossIndustryInvoiceType aCIIInvoice,
+                                         @Nonnull final ErrorList aErrorList)
   {
     final CIIToUBL21Converter aConverter = new CIIToUBL21Converter ();
     aConverter.setUBLCreationMode (EUBLCreationMode.INVOICE);
