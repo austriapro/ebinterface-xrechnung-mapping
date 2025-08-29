@@ -15,11 +15,11 @@
  */
 package at.austriapro.ebinterface.xrechnung;
 
-import javax.annotation.Nonnull;
-
-import com.helger.commons.annotation.Nonempty;
+import com.helger.annotation.Nonempty;
 import com.helger.diver.api.coord.DVRCoordinate;
 import com.helger.phive.xrechnung.XRechnungValidation;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * XRechnung version specifics.

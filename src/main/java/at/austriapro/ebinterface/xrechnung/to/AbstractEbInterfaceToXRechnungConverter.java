@@ -17,12 +17,11 @@ package at.austriapro.ebinterface.xrechnung.to;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-
-import com.helger.commons.ValueEnforcer;
+import com.helger.base.enforce.ValueEnforcer;
 
 import at.austriapro.ebinterface.xrechnung.AbstractEbInterfaceXRechnungConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
+import jakarta.annotation.Nonnull;
 
 /**
  * Base class for converting an ebInterface invoice to an XRechnung.

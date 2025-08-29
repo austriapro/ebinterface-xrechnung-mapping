@@ -17,14 +17,11 @@ package at.austriapro.ebinterface.xrechnung.to.ubl;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
-import com.helger.commons.error.list.ErrorList;
+import com.helger.diagnostics.error.list.ErrorList;
 import com.helger.ebinterface.EEbInterfaceVersion;
 import com.helger.ebinterface.v60.Ebi60InvoiceType;
 import com.helger.jaxb.validation.WrappedCollectingValidationEventHandler;
@@ -33,6 +30,8 @@ import com.helger.ubl21.UBL21Marshaller;
 import at.austriapro.ebinterface.ubl.to.EbInterface60ToInvoiceConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.validator.XRechnungValidator;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**

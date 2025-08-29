@@ -18,19 +18,18 @@ package at.austriapro.ebinterface.xrechnung.to.ubl;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.helger.commons.collection.impl.CommonsArrayList;
-import com.helger.commons.datetime.PDTToString;
-import com.helger.commons.datetime.XMLOffsetDate;
-import com.helger.commons.math.MathHelper;
-import com.helger.commons.string.StringHelper;
-import com.helger.commons.traits.IGenericImplTrait;
+import com.helger.base.numeric.BigHelper;
+import com.helger.base.string.StringHelper;
+import com.helger.base.trait.IGenericImplTrait;
+import com.helger.collection.commons.CommonsArrayList;
+import com.helger.datetime.format.PDTToString;
+import com.helger.datetime.xml.XMLOffsetDate;
 
 import at.austriapro.ebinterface.ubl.AbstractEbInterfaceUBLConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.InvoiceLineType;
@@ -67,8 +66,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * Constructor.
    *
    * @param aDisplayLocale
-   *        The display locale, e.g. used for the error message. May not be
-   *        <code>null</code>.
+   *        The display locale, e.g. used for the error message. May not be <code>null</code>.
    * @param aContentLocale
    *        The content locale of the invoice. May not be <code>null</code>.
    * @param eXRechnungVersion
@@ -92,8 +90,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
   }
 
   /**
-   * Set the supplier EndpointID schemeID. This is required for XRechnung 3.0
-   * onwards.
+   * Set the supplier EndpointID schemeID. This is required for XRechnung 3.0 onwards.
    *
    * @param s
    *        Endpoint ID scheme ID
@@ -143,8 +140,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
   }
 
   /**
-   * Set the customer EndpointID schemeID. This is required for XRechnung 3.0
-   * onwards.
+   * Set the customer EndpointID schemeID. This is required for XRechnung 3.0 onwards.
    *
    * @param s
    *        Endpoint ID scheme ID
@@ -228,7 +224,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
           }
         }
 
-        if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
+        if (StringHelper.isEmpty (aParty.getEndpointIDValue ()))
           aParty.setEndpointID (m_sSupplierEndpointID).setSchemeID (m_sSupplierEndpointIDScheme);
 
         // Convert all FurtherIdentification to a Note instead
@@ -269,7 +265,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
           }
         }
 
-        if (StringHelper.hasNoText (aParty.getEndpointIDValue ()))
+        if (StringHelper.isEmpty (aParty.getEndpointIDValue ()))
           aParty.setEndpointID (m_sCustomerEndpointID).setSchemeID (m_sCustomerEndpointIDScheme);
 
         // Convert all FurtherIdentification to a Note instead
@@ -310,7 +306,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
       if (aPrice != null)
       {
         final BigDecimal aPriceAmount = aPrice.getPriceAmountValue ();
-        if (aPriceAmount != null && MathHelper.isLT0 (aPriceAmount))
+        if (aPriceAmount != null && BigHelper.isLT0 (aPriceAmount))
         {
           aPrice.setPriceAmount (aPriceAmount.negate ());
           aInvoiceLine.setInvoicedQuantity (aInvoiceLine.getInvoicedQuantityValue ().negate ());
@@ -324,9 +320,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
             aAllowanceCharge.getAllowanceChargeReasonCode () == null)
         {
           final AllowanceChargeReasonType aACR = new AllowanceChargeReasonType ();
-          aACR.setValue (aAllowanceCharge.getChargeIndicator ()
-                                         .isValue () ? EText.CHARGE.getDisplayText (m_aContentLocale)
-                                                     : EText.ALLOWANCE.getDisplayText (m_aContentLocale));
+          aACR.setValue (aAllowanceCharge.getChargeIndicator ().isValue () ? EText.CHARGE.getDisplayText (
+                                                                                                          m_aContentLocale)
+                                                                           : EText.ALLOWANCE.getDisplayText (m_aContentLocale));
           aAllowanceCharge.addAllowanceChargeReason (aACR);
         }
       }
@@ -335,7 +331,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
     // Work around for error "BR-CO-25" (error in CEN validation artefacts
     // 1.3.0; see issue #84) that was introduced when updating to XRechnung
     // rules 1.2.2
-    if (MathHelper.isGT0 (aInvoice.getLegalMonetaryTotal ().getPayableAmountValue ()))
+    if (BigHelper.isGT0 (aInvoice.getLegalMonetaryTotal ().getPayableAmountValue ()))
     {
       if (!aInvoice.getPaymentTerms ().isEmpty ())
       {

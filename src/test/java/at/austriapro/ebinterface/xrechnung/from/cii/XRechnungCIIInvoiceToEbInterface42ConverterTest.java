@@ -26,12 +26,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.helger.cii.d16b.CIID16BCrossIndustryInvoiceTypeMarshaller;
-import com.helger.commons.error.list.ErrorList;
-import com.helger.commons.error.list.IErrorList;
-import com.helger.commons.io.file.FileSystemIterator;
-import com.helger.commons.io.file.IFileFilter;
+import com.helger.diagnostics.error.list.ErrorList;
+import com.helger.diagnostics.error.list.IErrorList;
 import com.helger.ebinterface.EbInterface42Marshaller;
 import com.helger.ebinterface.v42.Ebi42InvoiceType;
+import com.helger.io.file.FileSystemIterator;
+import com.helger.io.file.IFileFilter;
 
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 

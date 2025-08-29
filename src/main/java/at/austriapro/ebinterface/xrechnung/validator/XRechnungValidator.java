@@ -15,11 +15,9 @@
  */
 package at.austriapro.ebinterface.xrechnung.validator;
 
-import javax.annotation.Nonnull;
-
 import org.w3c.dom.Node;
 
-import com.helger.commons.error.list.ErrorList;
+import com.helger.diagnostics.error.list.ErrorList;
 import com.helger.diver.api.coord.DVRCoordinate;
 import com.helger.phive.api.execute.ValidationExecutionManager;
 import com.helger.phive.api.executorset.IValidationExecutorSet;
@@ -30,6 +28,8 @@ import com.helger.phive.en16931.EN16931Validation;
 import com.helger.phive.xml.source.IValidationSourceXML;
 import com.helger.phive.xml.source.ValidationSourceXML;
 import com.helger.phive.xrechnung.XRechnungValidation;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Validate created XRechnung elements.

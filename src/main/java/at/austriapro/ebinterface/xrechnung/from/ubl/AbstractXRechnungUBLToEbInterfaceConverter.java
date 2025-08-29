@@ -17,9 +17,8 @@ package at.austriapro.ebinterface.xrechnung.from.ubl;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-
 import at.austriapro.ebinterface.xrechnung.from.AbstractXRechnungToEbInterfaceConverter;
+import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class to convert XRechnung UBL to ebInterface,
