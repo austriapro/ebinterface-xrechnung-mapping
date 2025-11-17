@@ -15,11 +15,11 @@
  */
 package at.austriapro.ebinterface.xrechnung;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.annotation.Nonempty;
 import com.helger.diver.api.coord.DVRCoordinate;
 import com.helger.phive.xrechnung.XRechnungValidation;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * XRechnung version specifics.
@@ -65,10 +65,10 @@ public enum EXRechnungVersion
   private final DVRCoordinate m_aUBLInvoice;
   private final DVRCoordinate m_aUBLCreditNote;
 
-  EXRechnungVersion (@Nonnull @Nonempty final String sCustomizationID,
-                     @Nonnull final DVRCoordinate aCII,
-                     @Nonnull final DVRCoordinate aUBLInvoice,
-                     @Nonnull final DVRCoordinate aUBLCreditNote)
+  EXRechnungVersion (@NonNull @Nonempty final String sCustomizationID,
+                     @NonNull final DVRCoordinate aCII,
+                     @NonNull final DVRCoordinate aUBLInvoice,
+                     @NonNull final DVRCoordinate aUBLCreditNote)
   {
     m_sCustomizationID = sCustomizationID;
     m_aCII = aCII;
@@ -76,33 +76,33 @@ public enum EXRechnungVersion
     m_aUBLCreditNote = aUBLCreditNote;
   }
 
-  @Nonnull
+  @NonNull
   @Nonempty
   public String getCustomizationID ()
   {
     return m_sCustomizationID;
   }
 
-  @Nonnull
+  @NonNull
   @Nonempty
   public String getProfileID ()
   {
     return "urn:fdc:peppol.eu:2017:poacc:billing:01:1.0";
   }
 
-  @Nonnull
+  @NonNull
   public DVRCoordinate getVESID_CII ()
   {
     return m_aCII;
   }
 
-  @Nonnull
+  @NonNull
   public DVRCoordinate getVESID_UBLInvoice ()
   {
     return m_aUBLInvoice;
   }
 
-  @Nonnull
+  @NonNull
   public DVRCoordinate getVESID_UBLCreditNote ()
   {
     return m_aUBLCreditNote;

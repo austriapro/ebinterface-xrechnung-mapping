@@ -17,6 +17,9 @@ package at.austriapro.ebinterface.xrechnung;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.annotation.Nonempty;
 import com.helger.annotation.Nonnegative;
 import com.helger.annotation.misc.Translatable;
@@ -27,9 +30,6 @@ import com.helger.text.IMultilingualText;
 import com.helger.text.display.IHasDisplayTextWithArgs;
 import com.helger.text.resolve.DefaultTextResolver;
 import com.helger.text.util.TextHelper;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 /**
  * Abstract base class for converter between XRechnung to ebInterface (in both
@@ -52,16 +52,16 @@ public abstract class AbstractEbInterfaceXRechnungConverter
     CHARGE ("Zuschlag", "Charge"),
     DUE_DATE ("Fällig am {0}", "Due at {0}");
 
-    @Nonnull
+    @NonNull
     private final IMultilingualText m_aTP;
 
-    EText (@Nonnull final String sDE, @Nonnull final String sEN)
+    EText (@NonNull final String sDE, @NonNull final String sEN)
     {
       m_aTP = TextHelper.create_DE_EN (sDE, sEN);
     }
 
     @Nullable
-    public String getDisplayText (@Nonnull final Locale aContentLocale)
+    public String getDisplayText (@NonNull final Locale aContentLocale)
     {
       return DefaultTextResolver.getTextStatic (this, m_aTP, aContentLocale);
     }
@@ -70,8 +70,8 @@ public abstract class AbstractEbInterfaceXRechnungConverter
   protected final Locale m_aDisplayLocale;
   protected final Locale m_aContentLocale;
 
-  protected AbstractEbInterfaceXRechnungConverter (@Nonnull final Locale aDisplayLocale,
-                                                   @Nonnull final Locale aContentLocale)
+  protected AbstractEbInterfaceXRechnungConverter (@NonNull final Locale aDisplayLocale,
+                                                   @NonNull final Locale aContentLocale)
   {
     ValueEnforcer.notNull (aDisplayLocale, "DisplayLocale");
     ValueEnforcer.notNull (aContentLocale, "ContentLocale");
@@ -80,12 +80,12 @@ public abstract class AbstractEbInterfaceXRechnungConverter
   }
 
   @Nonnegative
-  protected static final int countWarnings (@Nonnull final IErrorList aErrorList)
+  protected static final int countWarnings (@NonNull final IErrorList aErrorList)
   {
     return aErrorList.getCount (x -> x.getErrorLevel () == EErrorLevel.WARN);
   }
 
-  @Nonnull
+  @NonNull
   @Nonempty
   protected final String warningText (@Nonnegative final int nWarn)
   {
@@ -93,7 +93,7 @@ public abstract class AbstractEbInterfaceXRechnungConverter
                       : EText.WARNINGS_N.getDisplayTextWithArgs (m_aDisplayLocale, Integer.toString (nWarn));
   }
 
-  @Nonnull
+  @NonNull
   @Nonempty
   protected final String errorText (@Nonnegative final int nErrs)
   {

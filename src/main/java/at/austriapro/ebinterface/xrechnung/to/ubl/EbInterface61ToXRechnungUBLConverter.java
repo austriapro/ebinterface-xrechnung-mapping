@@ -17,6 +17,8 @@ package at.austriapro.ebinterface.xrechnung.to.ubl;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -30,8 +32,6 @@ import com.helger.ubl21.UBL21Marshaller;
 import at.austriapro.ebinterface.ubl.to.EbInterface61ToInvoiceConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.validator.XRechnungValidator;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
@@ -57,9 +57,9 @@ public class EbInterface61ToXRechnungUBLConverter extends
    * @param eXRechnungVersion
    *        The target XRechnung version. May not be <code>null</code>.
    */
-  public EbInterface61ToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
-                                               @Nonnull final Locale aContentLocale,
-                                               @Nonnull final EXRechnungVersion eXRechnungVersion)
+  public EbInterface61ToXRechnungUBLConverter (@NonNull final Locale aDisplayLocale,
+                                               @NonNull final Locale aContentLocale,
+                                               @NonNull final EXRechnungVersion eXRechnungVersion)
   {
     super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }
@@ -79,7 +79,7 @@ public class EbInterface61ToXRechnungUBLConverter extends
    * @return <code>null</code> only if the basic conversion to UBL fails.
    */
   @Nullable
-  public InvoiceType convert (@Nonnull final Ebi61InvoiceType aEbiInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public InvoiceType convert (@NonNull final Ebi61InvoiceType aEbiInvoice, @NonNull final ErrorList aTransformErrorList)
   {
     // Convert ebInterface to UBL
     final InvoiceType aUBLInvoice = new EbInterface61ToInvoiceConverter (m_aDisplayLocale,

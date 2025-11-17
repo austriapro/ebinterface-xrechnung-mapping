@@ -18,6 +18,8 @@ package at.austriapro.ebinterface.xrechnung.from.cii;
 import java.io.Serializable;
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +28,6 @@ import com.helger.en16931.cii2ubl.CIIToUBL21Converter;
 import com.helger.en16931.cii2ubl.EUBLCreationMode;
 
 import at.austriapro.ebinterface.xrechnung.from.AbstractXRechnungToEbInterfaceConverter;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
@@ -40,15 +40,15 @@ public abstract class AbstractXRechnungCIIToEbInterfaceConverter extends Abstrac
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (AbstractXRechnungCIIToEbInterfaceConverter.class);
 
-  protected AbstractXRechnungCIIToEbInterfaceConverter (@Nonnull final Locale aDisplayLocale,
-                                                        @Nonnull final Locale aContentLocale)
+  protected AbstractXRechnungCIIToEbInterfaceConverter (@NonNull final Locale aDisplayLocale,
+                                                        @NonNull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
   @Nullable
-  protected InvoiceType convertCIIToUBL (@Nonnull final CrossIndustryInvoiceType aCIIInvoice,
-                                         @Nonnull final ErrorList aErrorList)
+  protected InvoiceType convertCIIToUBL (@NonNull final CrossIndustryInvoiceType aCIIInvoice,
+                                         @NonNull final ErrorList aErrorList)
   {
     final CIIToUBL21Converter aConverter = new CIIToUBL21Converter ();
     aConverter.setUBLCreationMode (EUBLCreationMode.INVOICE);

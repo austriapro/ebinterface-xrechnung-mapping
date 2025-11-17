@@ -17,8 +17,9 @@ package at.austriapro.ebinterface.xrechnung.from.ubl;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import at.austriapro.ebinterface.xrechnung.from.AbstractXRechnungToEbInterfaceConverter;
-import jakarta.annotation.Nonnull;
 
 /**
  * Abstract base class to convert XRechnung UBL to ebInterface,
@@ -27,8 +28,8 @@ import jakarta.annotation.Nonnull;
  */
 public abstract class AbstractXRechnungUBLToEbInterfaceConverter extends AbstractXRechnungToEbInterfaceConverter
 {
-  protected AbstractXRechnungUBLToEbInterfaceConverter (@Nonnull final Locale aDisplayLocale,
-                                                        @Nonnull final Locale aContentLocale)
+  protected AbstractXRechnungUBLToEbInterfaceConverter (@NonNull final Locale aDisplayLocale,
+                                                        @NonNull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }

@@ -15,6 +15,7 @@
  */
 package at.austriapro.ebinterface.xrechnung.validator;
 
+import org.jspecify.annotations.NonNull;
 import org.w3c.dom.Node;
 
 import com.helger.diagnostics.error.list.ErrorList;
@@ -28,8 +29,6 @@ import com.helger.phive.en16931.EN16931Validation;
 import com.helger.phive.xml.source.IValidationSourceXML;
 import com.helger.phive.xml.source.ValidationSourceXML;
 import com.helger.phive.xrechnung.XRechnungValidation;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * Validate created XRechnung elements.
@@ -48,9 +47,9 @@ public final class XRechnungValidator
   private XRechnungValidator ()
   {}
 
-  public static void validateXRechnung (@Nonnull final DVRCoordinate aVESID,
-                                        @Nonnull final Node aNode,
-                                        @Nonnull final ErrorList aErrorList)
+  public static void validateXRechnung (@NonNull final DVRCoordinate aVESID,
+                                        @NonNull final Node aNode,
+                                        @NonNull final ErrorList aErrorList)
   {
     final IValidationExecutorSet <IValidationSourceXML> aVES = VES_REGISTRY.getOfID (aVESID);
     if (aVES == null)

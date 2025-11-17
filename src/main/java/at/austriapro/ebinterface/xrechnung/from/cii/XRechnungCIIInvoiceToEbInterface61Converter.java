@@ -17,13 +17,14 @@ package at.austriapro.ebinterface.xrechnung.from.cii;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.diagnostics.error.list.ErrorList;
 import com.helger.ebinterface.v61.Ebi61InvoiceType;
 
 import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface61Converter;
 import at.austriapro.ebinterface.xrechnung.from.ubl.XRechnungUBLInvoiceToEbInterface61Converter;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
@@ -36,13 +37,13 @@ public class XRechnungCIIInvoiceToEbInterface61Converter extends AbstractXRechnu
 {
   private ICustomInvoiceToEbInterface61Converter m_aCustomizer;
 
-  public XRechnungCIIInvoiceToEbInterface61Converter (@Nonnull final Locale aDisplayLocale,
-                                                      @Nonnull final Locale aContentLocale)
+  public XRechnungCIIInvoiceToEbInterface61Converter (@NonNull final Locale aDisplayLocale,
+                                                      @NonNull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
-  @Nonnull
+  @NonNull
   public XRechnungCIIInvoiceToEbInterface61Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface61Converter aCustomizer)
   {
     m_aCustomizer = aCustomizer;
@@ -50,8 +51,8 @@ public class XRechnungCIIInvoiceToEbInterface61Converter extends AbstractXRechnu
   }
 
   @Nullable
-  public Ebi61InvoiceType convert (@Nonnull final CrossIndustryInvoiceType aCIIInvoice,
-                                   @Nonnull final ErrorList aTransformErrorList)
+  public Ebi61InvoiceType convert (@NonNull final CrossIndustryInvoiceType aCIIInvoice,
+                                   @NonNull final ErrorList aTransformErrorList)
   {
     final InvoiceType aUBLInvoice = convertCIIToUBL (aCIIInvoice, aTransformErrorList);
     if (aUBLInvoice == null)

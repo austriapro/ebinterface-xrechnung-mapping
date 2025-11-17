@@ -17,11 +17,12 @@ package at.austriapro.ebinterface.xrechnung.to;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+
 import com.helger.base.enforce.ValueEnforcer;
 
 import at.austriapro.ebinterface.xrechnung.AbstractEbInterfaceXRechnungConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
-import jakarta.annotation.Nonnull;
 
 /**
  * Base class for converting an ebInterface invoice to an XRechnung.
@@ -43,9 +44,9 @@ public abstract class AbstractEbInterfaceToXRechnungConverter extends AbstractEb
    * @param eXRechnungVersion
    *        The target XRechnung version. May not be <code>null</code>.
    */
-  protected AbstractEbInterfaceToXRechnungConverter (@Nonnull final Locale aDisplayLocale,
-                                                     @Nonnull final Locale aContentLocale,
-                                                     @Nonnull final EXRechnungVersion eXRechnungVersion)
+  protected AbstractEbInterfaceToXRechnungConverter (@NonNull final Locale aDisplayLocale,
+                                                     @NonNull final Locale aContentLocale,
+                                                     @NonNull final EXRechnungVersion eXRechnungVersion)
   {
     super (aDisplayLocale, aContentLocale);
     ValueEnforcer.notNull (eXRechnungVersion, "XRechnungVersion");
@@ -56,7 +57,7 @@ public abstract class AbstractEbInterfaceToXRechnungConverter extends AbstractEb
    * @return The target XRechnung version for which the files should be created.
    *         Never <code>null</code>.
    */
-  @Nonnull
+  @NonNull
   public final EXRechnungVersion getXRechnungVersion ()
   {
     return m_eXRechnungVersion;

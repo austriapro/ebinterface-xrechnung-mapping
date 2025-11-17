@@ -17,6 +17,8 @@ package at.austriapro.ebinterface.xrechnung.from.ubl;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +28,6 @@ import com.helger.ebinterface.v50.Ebi50InvoiceType;
 
 import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface50Converter;
 import at.austriapro.ebinterface.ubl.from.invoice.InvoiceToEbInterface50Converter;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 
 /**
@@ -43,13 +43,13 @@ public class XRechnungUBLInvoiceToEbInterface50Converter extends AbstractXRechnu
 
   private ICustomInvoiceToEbInterface50Converter m_aCustomizer;
 
-  public XRechnungUBLInvoiceToEbInterface50Converter (@Nonnull final Locale aDisplayLocale,
-                                                      @Nonnull final Locale aContentLocale)
+  public XRechnungUBLInvoiceToEbInterface50Converter (@NonNull final Locale aDisplayLocale,
+                                                      @NonNull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
-  @Nonnull
+  @NonNull
   public XRechnungUBLInvoiceToEbInterface50Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface50Converter aCustomizer)
   {
     m_aCustomizer = aCustomizer;
@@ -57,7 +57,7 @@ public class XRechnungUBLInvoiceToEbInterface50Converter extends AbstractXRechnu
   }
 
   @Nullable
-  public Ebi50InvoiceType convert (@Nonnull final InvoiceType aUBLInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public Ebi50InvoiceType convert (@NonNull final InvoiceType aUBLInvoice, @NonNull final ErrorList aTransformErrorList)
   {
     final int nErrorsBefore = aTransformErrorList.getErrorCount ();
     final int nWarnsBefore = countWarnings (aTransformErrorList);

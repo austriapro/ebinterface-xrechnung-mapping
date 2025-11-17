@@ -18,6 +18,9 @@ package at.austriapro.ebinterface.xrechnung.to.ubl;
 import java.math.BigDecimal;
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.base.numeric.BigHelper;
 import com.helger.base.string.StringHelper;
 import com.helger.base.trait.IGenericImplTrait;
@@ -28,8 +31,6 @@ import com.helger.datetime.xml.XMLOffsetDate;
 import at.austriapro.ebinterface.ubl.AbstractEbInterfaceUBLConverter;
 import at.austriapro.ebinterface.xrechnung.EXRechnungVersion;
 import at.austriapro.ebinterface.xrechnung.to.AbstractEbInterfaceToXRechnungConverter;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.DocumentReferenceType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.InvoiceLineType;
@@ -72,9 +73,9 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * @param eXRechnungVersion
    *        The target XRechnung version. May not be <code>null</code>.
    */
-  protected AbstractEbInterfaceToXRechnungUBLConverter (@Nonnull final Locale aDisplayLocale,
-                                                        @Nonnull final Locale aContentLocale,
-                                                        @Nonnull final EXRechnungVersion eXRechnungVersion)
+  protected AbstractEbInterfaceToXRechnungUBLConverter (@NonNull final Locale aDisplayLocale,
+                                                        @NonNull final Locale aContentLocale,
+                                                        @NonNull final EXRechnungVersion eXRechnungVersion)
   {
     super (aDisplayLocale, aContentLocale, eXRechnungVersion);
   }
@@ -97,7 +98,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * @return this for chaining
    * @since 2.1.1
    */
-  @Nonnull
+  @NonNull
   public final IMPLTYPE setSupplierEndpointIDScheme (@Nullable final String s)
   {
     m_sSupplierEndpointIDScheme = s;
@@ -122,7 +123,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * @return this for chaining
    * @since 2.1.1
    */
-  @Nonnull
+  @NonNull
   public final IMPLTYPE setSupplierEndpointID (@Nullable final String s)
   {
     m_sSupplierEndpointID = s;
@@ -147,7 +148,7 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * @return this for chaining
    * @since 2.1.1
    */
-  @Nonnull
+  @NonNull
   public final IMPLTYPE setCustomerEndpointIDScheme (@Nullable final String s)
   {
     m_sCustomerEndpointIDScheme = s;
@@ -172,14 +173,14 @@ public abstract class AbstractEbInterfaceToXRechnungUBLConverter <IMPLTYPE exten
    * @return this for chaining
    * @since 2.1.1
    */
-  @Nonnull
+  @NonNull
   public final IMPLTYPE setCustomerEndpointID (@Nullable final String s)
   {
     m_sCustomerEndpointID = s;
     return thisAsT ();
   }
 
-  public void modifyDefaultUBLInvoice (@Nonnull final InvoiceType aInvoice)
+  public void modifyDefaultUBLInvoice (@NonNull final InvoiceType aInvoice)
   {
     if (aInvoice.getCustomizationID () == null)
       aInvoice.setCustomizationID (m_eXRechnungVersion.getCustomizationID ());

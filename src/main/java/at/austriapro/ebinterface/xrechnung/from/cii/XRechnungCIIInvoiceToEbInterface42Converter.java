@@ -17,13 +17,14 @@ package at.austriapro.ebinterface.xrechnung.from.cii;
 
 import java.util.Locale;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.helger.diagnostics.error.list.ErrorList;
 import com.helger.ebinterface.v42.Ebi42InvoiceType;
 
 import at.austriapro.ebinterface.ubl.from.invoice.ICustomInvoiceToEbInterface42Converter;
 import at.austriapro.ebinterface.xrechnung.from.ubl.XRechnungUBLInvoiceToEbInterface42Converter;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
 import un.unece.uncefact.data.standard.crossindustryinvoice._100.CrossIndustryInvoiceType;
 
@@ -36,12 +37,12 @@ public class XRechnungCIIInvoiceToEbInterface42Converter extends AbstractXRechnu
 {
   private ICustomInvoiceToEbInterface42Converter m_aCustomizer;
 
-  public XRechnungCIIInvoiceToEbInterface42Converter (@Nonnull final Locale aDisplayLocale, @Nonnull final Locale aContentLocale)
+  public XRechnungCIIInvoiceToEbInterface42Converter (@NonNull final Locale aDisplayLocale, @NonNull final Locale aContentLocale)
   {
     super (aDisplayLocale, aContentLocale);
   }
 
-  @Nonnull
+  @NonNull
   public XRechnungCIIInvoiceToEbInterface42Converter setCustomizer (@Nullable final ICustomInvoiceToEbInterface42Converter aCustomizer)
   {
     m_aCustomizer = aCustomizer;
@@ -49,7 +50,7 @@ public class XRechnungCIIInvoiceToEbInterface42Converter extends AbstractXRechnu
   }
 
   @Nullable
-  public Ebi42InvoiceType convert (@Nonnull final CrossIndustryInvoiceType aCIIInvoice, @Nonnull final ErrorList aTransformErrorList)
+  public Ebi42InvoiceType convert (@NonNull final CrossIndustryInvoiceType aCIIInvoice, @NonNull final ErrorList aTransformErrorList)
   {
     final InvoiceType aUBLInvoice = convertCIIToUBL (aCIIInvoice, aTransformErrorList);
     if (aUBLInvoice == null)
