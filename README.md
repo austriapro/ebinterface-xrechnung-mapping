@@ -1,8 +1,11 @@
 # ebinterface-xrechnung-mapping
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/at.austriapro/ebinterface-xrechnung-mapping/badge.svg)](https://maven-badges.herokuapp.com/maven-central/at.austriapro/ebinterface-xrechnung-mapping) 
+<!-- ph-badge-start -->
+[![Sonatype Central](https://maven-badges.sml.io/sonatype-central/at.austriapro/ebinterface-xrechnung-mapping/badge.svg)](https://maven-badges.sml.io/sonatype-central/at.austriapro/ebinterface-xrechnung-mapping/)
 [![javadoc](https://javadoc.io/badge2/at.austriapro/ebinterface-xrechnung-mapping/javadoc.svg)](https://javadoc.io/doc/at.austriapro/ebinterface-xrechnung-mapping)
-[![CodeCov](https://codecov.io/gh/austriapro/ebinterface-xrechnung-mapping/branch/master/graph/badge.svg)](https://codecov.io/gh/austriapro/ebinterface-xrechnung-mapping)
+
+> If this project saved you some time or made your day a little easier, a star would mean a lot — it helps others find it too.
+<!-- ph-badge-end -->
 
 Mapping between ebInterface and the German XRechnung UBL.
 This is a library to convert between the two formats.
