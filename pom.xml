@@ -79,7 +79,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-ebinterface</artifactId>
-        <version>8.1.0</version>
+        <version>8.1.1</version>
       </dependency>
       <dependency>
         <groupId>com.helger.ubl</groupId>
@@ -117,7 +117,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>en16931-cii2ubl</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
